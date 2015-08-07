@@ -1,0 +1,6 @@
+
+# ?. Shortest Phrase of Power, 3-char
+Ei!
+
+# Longest is 51 chars
+
