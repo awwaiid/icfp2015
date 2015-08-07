@@ -6,4 +6,5 @@ requires 'JSON::MaybeXS';
 requires 'Cpanel::JSON::XS';
 requires 'File::Slurp';
 requires 'PHP';
-
+requires 'Moops';
+requires 'Data::Dump';

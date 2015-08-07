@@ -1,0 +1,1 @@
+{"target":"MooX::late","pathname":"T/TO/TOBYINK/MooX-late-0.015.tar.gz","version":"0.015","name":"MooX::late","dist":"MooX-late-0.015","provides":{"MooX::late::DefinitionContext":{"file":"lib/MooX/late.pm","version":"0.015"},"MooX::late":{"version":"0.015","file":"lib/MooX/late.pm"}}}

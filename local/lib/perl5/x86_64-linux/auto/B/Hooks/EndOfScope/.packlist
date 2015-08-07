@@ -1,0 +1,13 @@
+/home/awwaiid/icfp/local/lib/perl5/B/Hooks/EndOfScope.pm
+/home/awwaiid/icfp/local/lib/perl5/B/Hooks/EndOfScope/PP.pm
+/home/awwaiid/icfp/local/lib/perl5/B/Hooks/EndOfScope/PP/FieldHash.pm
+/home/awwaiid/icfp/local/lib/perl5/B/Hooks/EndOfScope/PP/HintHash.pm
+/home/awwaiid/icfp/local/lib/perl5/B/Hooks/EndOfScope/XS.pm
+/home/awwaiid/local/perlbrew/perls/perl-5.20.1/lib/site_perl/5.20.1/B/Hooks/EndOfScope.pm
+/home/awwaiid/local/perlbrew/perls/perl-5.20.1/lib/site_perl/5.20.1/B/Hooks/EndOfScope/PP.pm
+/home/awwaiid/local/perlbrew/perls/perl-5.20.1/lib/site_perl/5.20.1/B/Hooks/EndOfScope/PP/FieldHash.pm
+/home/awwaiid/local/perlbrew/perls/perl-5.20.1/lib/site_perl/5.20.1/B/Hooks/EndOfScope/PP/HintHash.pm
+/home/awwaiid/local/perlbrew/perls/perl-5.20.1/lib/site_perl/5.20.1/B/Hooks/EndOfScope/XS.pm
+/home/awwaiid/local/perlbrew/perls/perl-5.20.1/man/man3/B::Hooks::EndOfScope.3
+/home/awwaiid/local/perlbrew/perls/perl-5.20.1/man/man3/B::Hooks::EndOfScope::PP.3
+/home/awwaiid/local/perlbrew/perls/perl-5.20.1/man/man3/B::Hooks::EndOfScope::XS.3
