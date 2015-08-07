@@ -4,7 +4,7 @@
       "Florian Ragwitz <rafl@debian.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 5.037, CPAN::Meta::Converter version 2.150004, CPAN::Meta::Converter version 2.150005",
+   "generated_by" : "Dist::Zilla version 5.037, CPAN::Meta::Converter version 2.150004, CPAN::Meta::Converter version 2.120921",
    "keywords" : [
       "namespaces",
       "clean",
@@ -1121,6 +1121,5 @@
       "Chris Prather <cprather@hdpublishing.com>",
       "Andrew Rodland <andrew@hbslabs.com>"
    ],
-   "x_permissions_from_module" : "namespace::autoclean",
-   "x_serialization_backend" : "JSON::PP version 2.27203"
+   "x_permissions_from_module" : "namespace::autoclean"
 }

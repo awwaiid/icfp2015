@@ -4,7 +4,7 @@
       "chocolateboy <chocolate@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "ExtUtils::MakeMaker version 6.55_02, CPAN::Meta::Converter version 2.150005",
+   "generated_by" : "ExtUtils::MakeMaker version 6.55_02, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -27,6 +27,9 @@
       },
       "configure" : {
          "requires" : {
+            "B::Hooks::OP::Annotation" : "0.43",
+            "B::Hooks::OP::Check" : "0.18",
+            "ExtUtils::Depends" : "0.304",
             "ExtUtils::MakeMaker" : "0"
          }
       },
@@ -44,6 +47,5 @@
          "url" : "http://github.com/chocolateboy/true"
       }
    },
-   "version" : "0.18",
-   "x_serialization_backend" : "JSON::PP version 2.27203"
+   "version" : "0.18"
 }

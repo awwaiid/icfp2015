@@ -4,7 +4,7 @@
       "Jesse Luehrs <doy@tozt.net>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300035, CPAN::Meta::Converter version 2.132140, CPAN::Meta::Converter version 2.150005",
+   "generated_by" : "Dist::Zilla version 4.300035, CPAN::Meta::Converter version 2.132140, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "mit"
    ],
@@ -356,6 +356,5 @@
          "version" : "4.300035"
       }
    },
-   "x_authority" : "cpan:DOY",
-   "x_serialization_backend" : "JSON::PP version 2.27203"
+   "x_authority" : "cpan:DOY"
 }

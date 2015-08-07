@@ -4,7 +4,7 @@
       "Lukas Mai <l.mai@web.de>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "ExtUtils::MakeMaker version 6.98, CPAN::Meta::Converter version 2.140640, CPAN::Meta::Converter version 2.150005",
+   "generated_by" : "ExtUtils::MakeMaker version 6.98, CPAN::Meta::Converter version 2.140640, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -55,6 +55,5 @@
          "web" : "https://github.com/mauke/Keyword-Simple"
       }
    },
-   "version" : "0.03",
-   "x_serialization_backend" : "JSON::PP version 2.27203"
+   "version" : "0.03"
 }

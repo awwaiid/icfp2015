@@ -4,7 +4,7 @@
       "chocolateboy <chocolate@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "ExtUtils::MakeMaker version 6.55_02, CPAN::Meta::Converter version 2.150005",
+   "generated_by" : "ExtUtils::MakeMaker version 6.55_02, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -27,6 +27,7 @@
       },
       "configure" : {
          "requires" : {
+            "ExtUtils::Depends" : "0.304",
             "ExtUtils::MakeMaker" : "0"
          }
       },
@@ -42,6 +43,5 @@
          "url" : "http://github.com/chocolateboy/B-Hooks-OP-Annotation"
       }
    },
-   "version" : "0.44",
-   "x_serialization_backend" : "JSON::PP version 2.27203"
+   "version" : "0.44"
 }

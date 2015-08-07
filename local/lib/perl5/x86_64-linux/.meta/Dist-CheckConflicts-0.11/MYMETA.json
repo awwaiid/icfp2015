@@ -4,7 +4,7 @@
       "Jesse Luehrs <doy@tozt.net>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 5.014, CPAN::Meta::Converter version 2.140640, CPAN::Meta::Converter version 2.150005",
+   "generated_by" : "Dist::Zilla version 5.014, CPAN::Meta::Converter version 2.140640, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -458,6 +458,5 @@
       "Graham Knop <haarg@haarg.org>",
       "Karen Etheridge <ether@cpan.org>",
       "Toby Inkster <mail@tobyinkster.co.uk>"
-   ],
-   "x_serialization_backend" : "JSON::PP version 2.27203"
+   ]
 }

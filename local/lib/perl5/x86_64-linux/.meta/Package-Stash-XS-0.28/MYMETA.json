@@ -4,7 +4,7 @@
       "Jesse Luehrs <doy@tozt.net>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300034, CPAN::Meta::Converter version 2.120921, CPAN::Meta::Converter version 2.150005",
+   "generated_by" : "Dist::Zilla version 4.300034, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -312,6 +312,5 @@
       "Florian Ragwitz <rafl@debian.org>",
       "Justin Hunter <justin.d.hunter@gmail.com>",
       "Tim Bunce <Tim.Bunce@pobox.com>"
-   ],
-   "x_serialization_backend" : "JSON::PP version 2.27203"
+   ]
 }

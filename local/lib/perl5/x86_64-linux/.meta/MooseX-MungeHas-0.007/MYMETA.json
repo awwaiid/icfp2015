@@ -4,7 +4,7 @@
       "Toby Inkster (TOBYINK) <tobyink@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Inkt::Profile::TOBYINK version 0.016, CPAN::Meta::Converter version 2.140640, CPAN::Meta::Converter version 2.150005",
+   "generated_by" : "Dist::Inkt::Profile::TOBYINK version 0.016, CPAN::Meta::Converter version 2.140640, CPAN::Meta::Converter version 2.120921",
    "keywords" : [],
    "license" : [
       "perl_5"
@@ -39,6 +39,7 @@
       },
       "runtime" : {
          "requires" : {
+            "Eval::TypeTiny" : "0.006",
             "Sub::Util" : "1.40",
             "perl" : "5.008000"
          },
@@ -90,6 +91,5 @@
    "version" : "0.007",
    "x_contributors" : [
       "Andrew Rodland (ARODLAND) <arodland@cpan.org>"
-   ],
-   "x_serialization_backend" : "JSON::PP version 2.27203"
+   ]
 }

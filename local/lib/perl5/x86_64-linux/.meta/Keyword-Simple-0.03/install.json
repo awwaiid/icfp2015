@@ -1,1 +1,1 @@
-{"provides":{"Keyword::Simple":{"file":"lib/Keyword/Simple.pm","version":"0.03"}},"name":"Keyword::Simple","dist":"Keyword-Simple-0.03","pathname":"M/MA/MAUKE/Keyword-Simple-0.03.tar.gz","target":"Keyword::Simple","version":"0.03"}
+{"dist":"Keyword-Simple-0.03","target":"Keyword::Simple","provides":{"Keyword::Simple":{"file":"lib/Keyword/Simple.pm","version":"0.03"}},"name":"Keyword::Simple","pathname":"M/MA/MAUKE/Keyword-Simple-0.03.tar.gz","version":"0.03"}

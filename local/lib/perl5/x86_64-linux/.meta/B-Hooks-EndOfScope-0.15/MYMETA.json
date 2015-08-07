@@ -5,7 +5,7 @@
       "Peter Rabbitson <ribasushi@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 5.036, CPAN::Meta::Converter version 2.150003, CPAN::Meta::Converter version 2.150005",
+   "generated_by" : "Dist::Zilla version 5.036, CPAN::Meta::Converter version 2.150003, CPAN::Meta::Converter version 2.120921",
    "keywords" : [
       "code",
       "hooks",
@@ -36,7 +36,8 @@
       "configure" : {
          "requires" : {
             "ExtUtils::CBuilder" : "0.26",
-            "ExtUtils::MakeMaker" : "0"
+            "ExtUtils::MakeMaker" : "0",
+            "perl" : "5.008001"
          }
       },
       "develop" : {
@@ -1071,6 +1072,5 @@
       "Tatsuhiko Miyagawa <miyagawa@bulknews.net>",
       "Tomas Doran <bobtfish@bobtfish.net>"
    ],
-   "x_permissions_from_module" : "B::Hooks::EndOfScope",
-   "x_serialization_backend" : "JSON::PP version 2.27203"
+   "x_permissions_from_module" : "B::Hooks::EndOfScope"
 }

@@ -4,7 +4,7 @@
       "Robert 'phaylon' Sedlacek <rs@474.at>, Florian Ragwitz <rafl@debian.org>, Jesse Luehrs <doy@tozt.net>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "ExtUtils::MakeMaker version 6.84, CPAN::Meta::Converter version 2.132830, CPAN::Meta::Converter version 2.150005",
+   "generated_by" : "ExtUtils::MakeMaker version 6.84, CPAN::Meta::Converter version 2.132830, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -48,6 +48,5 @@
          "url" : "git://git.shadowcat.co.uk/p5sagit/namespace-clean.git"
       }
    },
-   "version" : "0.25",
-   "x_serialization_backend" : "JSON::PP version 2.27203"
+   "version" : "0.25"
 }

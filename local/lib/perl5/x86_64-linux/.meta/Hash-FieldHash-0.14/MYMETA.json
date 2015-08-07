@@ -4,7 +4,7 @@
       "Fuji, Goro (gfx) <gfuji(at)cpan.org>."
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v0.4.3, CPAN::Meta::Converter version 2.150005",
+   "generated_by" : "Minilla/v0.4.3, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -81,6 +81,5 @@
       "gfx <gfuji@cpan.org>",
       "Fuji Goro <fuji.goro@dena.jp>",
       "Fuji, Goro <g.psy.va@gmail.com>"
-   ],
-   "x_serialization_backend" : "JSON::PP version 2.27203"
+   ]
 }

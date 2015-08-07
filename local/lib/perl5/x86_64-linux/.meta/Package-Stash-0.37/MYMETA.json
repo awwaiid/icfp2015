@@ -4,7 +4,7 @@
       "Jesse Luehrs <doy@tozt.net>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 5.020, CPAN::Meta::Converter version 2.140640, CPAN::Meta::Converter version 2.150005",
+   "generated_by" : "Dist::Zilla version 5.020, CPAN::Meta::Converter version 2.140640, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -573,6 +573,5 @@
       "Kent Fredric <kentfredric@gmail.com>",
       "Niko Tyni <ntyni@debian.org>",
       "Tim Bunce <Tim.Bunce@pobox.com>"
-   ],
-   "x_serialization_backend" : "JSON::PP version 2.27203"
+   ]
 }

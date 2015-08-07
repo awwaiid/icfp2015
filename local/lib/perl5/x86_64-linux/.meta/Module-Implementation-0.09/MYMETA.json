@@ -4,7 +4,7 @@
       "Dave Rolsky <autarch@urth.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 5.020, CPAN::Meta::Converter version 2.142060, CPAN::Meta::Converter version 2.150005",
+   "generated_by" : "Dist::Zilla version 5.020, CPAN::Meta::Converter version 2.142060, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "artistic_2"
    ],
@@ -620,6 +620,5 @@
    "x_authority" : "cpan:DROLSKY",
    "x_contributors" : [
       "Peter Rabbitson <ribasushi@cpan.org>"
-   ],
-   "x_serialization_backend" : "JSON::PP version 2.27203"
+   ]
 }

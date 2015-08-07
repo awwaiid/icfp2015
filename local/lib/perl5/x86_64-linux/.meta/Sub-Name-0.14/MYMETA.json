@@ -4,7 +4,7 @@
       "Matthijs van Duin <xmath@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 5.035, CPAN::Meta::Converter version 2.150003, CPAN::Meta::Converter version 2.150005",
+   "generated_by" : "Dist::Zilla version 5.035, CPAN::Meta::Converter version 2.150003, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -28,7 +28,8 @@
       },
       "configure" : {
          "requires" : {
-            "ExtUtils::MakeMaker" : "0"
+            "ExtUtils::MakeMaker" : "0",
+            "perl" : "5.006"
          }
       },
       "develop" : {
@@ -1058,6 +1059,5 @@
       "gfx <gfuji@cpan.org>",
       "J.R. Mash <jmash.code@gmail.com>"
    ],
-   "x_permissions_from_module" : "Sub::Name",
-   "x_serialization_backend" : "JSON::PP version 2.27203"
+   "x_permissions_from_module" : "Sub::Name"
 }

@@ -5,7 +5,7 @@
       "Leon Timmermans <leont@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 5.019, CPAN::Meta::Converter version 2.140640, CPAN::Meta::Converter version 2.150005",
+   "generated_by" : "Dist::Zilla version 5.019, CPAN::Meta::Converter version 2.140640, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -66,6 +66,5 @@
          "web" : "https://github.com/Leont/extutils-config"
       }
    },
-   "version" : "0.008",
-   "x_serialization_backend" : "JSON::PP version 2.27203"
+   "version" : "0.008"
 }

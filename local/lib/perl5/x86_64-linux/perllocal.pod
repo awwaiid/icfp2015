@@ -1,290 +1,4 @@
-=head2 Fri Aug  7 11:29:35 2015: C<Module> L<File::Slurp|File::Slurp>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 9999.19>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:29:37 2015: C<Module> L<Cpanel::JSON::XS|Cpanel::JSON::XS>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 3.0115>
-
-=item *
-
-C<EXE_FILES: bin/cpanel_json_xs>
-
-=back
-
-=head2 Fri Aug  7 11:29:37 2015: C<Module> L<JSON::MaybeXS|JSON::MaybeXS>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 1.003005>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:41:32 2015: C<Module> L<PHP|PHP>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 0.15>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:57:36 2015: C<Module> L<Class::Method::Modifiers|Class::Method::Modifiers>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 2.11>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:57:39 2015: C<Module> L<CPAN::Meta|CPAN::Meta>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 2.150005>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:57:40 2015: C<Module> L<Role::Tiny|Role::Tiny>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 2.000001>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:57:41 2015: C<Module> L<Sub::Exporter::Progressive|Sub::Exporter::Progressive>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 0.001011>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:57:42 2015: C<Module> L<Devel::GlobalDestruction|Devel::GlobalDestruction>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 0.13>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:57:42 2015: C<Module> L<Moo|Moo>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 2.000002>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:57:44 2015: C<Module> L<Exporter::Tiny|Exporter::Tiny>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 0.042>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:57:44 2015: C<Module> L<Type::Tiny|Type::Tiny>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 1.000005>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:57:44 2015: C<Module> L<MooX::late|MooX::late>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 0.015>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:57:47 2015: C<Module> L<List::Util|List::Util>
+=head2 Fri Aug  7 14:13:05 2015: C<Module> L<List::Util|List::Util>
 
 =over 4
 
@@ -306,95 +20,7 @@ C<EXE_FILES: >
 
 =back
 
-=head2 Fri Aug  7 11:57:47 2015: C<Module> L<MooseX::MungeHas|MooseX::MungeHas>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 0.007>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:57:49 2015: C<Module> L<Variable::Magic|Variable::Magic>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 0.58>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:57:51 2015: C<Module> L<Test::LeakTrace|Test::LeakTrace>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 0.15>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:57:52 2015: C<Module> L<Lexical::Accessor|Lexical::Accessor>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 0.008>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:57:53 2015: C<Module> L<Try::Tiny|Try::Tiny>
+=head2 Fri Aug  7 14:13:05 2015: C<Module> L<Try::Tiny|Try::Tiny>
 
 =over 4
 
@@ -416,271 +42,7 @@ C<EXE_FILES: >
 
 =back
 
-=head2 Fri Aug  7 11:57:54 2015: C<Module> L<Import::Into|Import::Into>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 1.002004>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:57:56 2015: C<Module> L<Module::Implementation|Module::Implementation>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 0.09>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:57:56 2015: C<Module> L<B::Hooks::EndOfScope|B::Hooks::EndOfScope>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 0.15>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:57:57 2015: C<Module> L<Keyword::Simple|Keyword::Simple>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 0.03>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:57:58 2015: C<Module> L<Devel::StrictMode|Devel::StrictMode>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 0.003>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:57:58 2015: C<Module> L<PerlX::Assert|PerlX::Assert>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 0.904>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:57:59 2015: C<Module> L<ExtUtils::Depends|ExtUtils::Depends>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 0.404>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:58:00 2015: C<Module> L<B::Hooks::OP::Check|B::Hooks::OP::Check>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 0.19>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:58:01 2015: C<Module> L<B::Hooks::OP::Annotation|B::Hooks::OP::Annotation>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 0.44>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:58:02 2015: C<Module> L<Devel::StackTrace|Devel::StackTrace>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 2.00>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:58:03 2015: C<Module> L<true|true>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 0.18>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:58:12 2015: C<Module> L<Parse::Keyword|Parse::Keyword>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 0.08>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:58:14 2015: C<Module> L<ExtUtils::Helpers|ExtUtils::Helpers>
+=head2 Fri Aug  7 14:13:07 2015: C<Module> L<ExtUtils::Helpers|ExtUtils::Helpers>
 
 =over 4
 
@@ -702,7 +64,29 @@ C<EXE_FILES: >
 
 =back
 
-=head2 Fri Aug  7 11:58:15 2015: C<Module> L<ExtUtils::Config|ExtUtils::Config>
+=head2 Fri Aug  7 14:13:09 2015: C<Module> L<Test::Harness|Test::Harness>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 3.35>
+
+=item *
+
+C<EXE_FILES: bin/prove>
+
+=back
+
+=head2 Fri Aug  7 14:13:09 2015: C<Module> L<ExtUtils::Config|ExtUtils::Config>
 
 =over 4
 
@@ -724,7 +108,7 @@ C<EXE_FILES: >
 
 =back
 
-=head2 Fri Aug  7 11:58:15 2015: C<Module> L<ExtUtils::InstallPaths|ExtUtils::InstallPaths>
+=head2 Fri Aug  7 14:13:10 2015: C<Module> L<ExtUtils::InstallPaths|ExtUtils::InstallPaths>
 
 =over 4
 
@@ -746,7 +130,7 @@ C<EXE_FILES: >
 
 =back
 
-=head2 Fri Aug  7 11:58:17 2015: C<Module> L<Dist::CheckConflicts|Dist::CheckConflicts>
+=head2 Fri Aug  7 14:13:12 2015: C<Module> L<Sub::Exporter::Progressive|Sub::Exporter::Progressive>
 
 =over 4
 
@@ -760,7 +144,7 @@ C<LINKTYPE: dynamic>
 
 =item *
 
-C<VERSION: 0.11>
+C<VERSION: 0.001011>
 
 =item *
 
@@ -768,7 +152,7 @@ C<EXE_FILES: >
 
 =back
 
-=head2 Fri Aug  7 11:58:19 2015: C<Module> L<Package::Stash::XS|Package::Stash::XS>
+=head2 Fri Aug  7 14:13:14 2015: C<Module> L<Variable::Magic|Variable::Magic>
 
 =over 4
 
@@ -782,7 +166,7 @@ C<LINKTYPE: dynamic>
 
 =item *
 
-C<VERSION: 0.28>
+C<VERSION: 0.58>
 
 =item *
 
@@ -790,7 +174,7 @@ C<EXE_FILES: >
 
 =back
 
-=head2 Fri Aug  7 11:58:19 2015: C<Module> L<Package::Stash|Package::Stash>
+=head2 Fri Aug  7 14:13:16 2015: C<Module> L<Module::Implementation|Module::Implementation>
 
 =over 4
 
@@ -804,29 +188,7 @@ C<LINKTYPE: dynamic>
 
 =item *
 
-C<VERSION: 0.37>
-
-=item *
-
-C<EXE_FILES: bin/package-stash-conflicts>
-
-=back
-
-=head2 Fri Aug  7 11:58:20 2015: C<Module> L<namespace::clean|namespace::clean>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 0.25>
+C<VERSION: 0.09>
 
 =item *
 
@@ -834,7 +196,29 @@ C<EXE_FILES: >
 
 =back
 
-=head2 Fri Aug  7 11:58:21 2015: C<Module> L<Sub::Identify|Sub::Identify>
+=head2 Fri Aug  7 14:13:16 2015: C<Module> L<B::Hooks::EndOfScope|B::Hooks::EndOfScope>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.15>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Aug  7 14:13:17 2015: C<Module> L<Sub::Identify|Sub::Identify>
 
 =over 4
 
@@ -856,7 +240,7 @@ C<EXE_FILES: >
 
 =back
 
-=head2 Fri Aug  7 11:58:23 2015: C<Module> L<Return::Type|Return::Type>
+=head2 Fri Aug  7 14:13:19 2015: C<Module> L<Dist::CheckConflicts|Dist::CheckConflicts>
 
 =over 4
 
@@ -870,7 +254,7 @@ C<LINKTYPE: dynamic>
 
 =item *
 
-C<VERSION: 0.005>
+C<VERSION: 0.11>
 
 =item *
 
@@ -878,7 +262,403 @@ C<EXE_FILES: >
 
 =back
 
-=head2 Fri Aug  7 11:58:25 2015: C<Module> L<Data::Alias|Data::Alias>
+=head2 Fri Aug  7 14:13:21 2015: C<Module> L<Package::Stash::XS|Package::Stash::XS>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.28>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Aug  7 14:13:21 2015: C<Module> L<Package::Stash|Package::Stash>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.37>
+
+=item *
+
+C<EXE_FILES: bin/package-stash-conflicts>
+
+=back
+
+=head2 Fri Aug  7 14:13:21 2015: C<Module> L<namespace::clean|namespace::clean>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.25>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Aug  7 14:13:24 2015: C<Module> L<Class::Method::Modifiers|Class::Method::Modifiers>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 2.11>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Aug  7 14:13:25 2015: C<Module> L<Role::Tiny|Role::Tiny>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 2.000001>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Aug  7 14:13:25 2015: C<Module> L<Devel::GlobalDestruction|Devel::GlobalDestruction>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.13>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Aug  7 14:13:26 2015: C<Module> L<Moo|Moo>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 2.000002>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Aug  7 14:13:27 2015: C<Module> L<Exporter::Tiny|Exporter::Tiny>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.042>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Aug  7 14:13:28 2015: C<Module> L<Type::Tiny|Type::Tiny>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.000005>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Aug  7 14:13:28 2015: C<Module> L<MooX::late|MooX::late>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.015>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Aug  7 14:13:30 2015: C<Module> L<ExtUtils::Depends|ExtUtils::Depends>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.404>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Aug  7 14:13:31 2015: C<Module> L<B::Hooks::OP::Check|B::Hooks::OP::Check>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.19>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Aug  7 14:13:32 2015: C<Module> L<B::Hooks::OP::Annotation|B::Hooks::OP::Annotation>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.44>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Aug  7 14:13:33 2015: C<Module> L<Devel::StackTrace|Devel::StackTrace>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 2.00>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Aug  7 14:13:33 2015: C<Module> L<true|true>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.18>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Aug  7 14:13:34 2015: C<Module> L<Keyword::Simple|Keyword::Simple>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.03>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Aug  7 14:13:39 2015: C<Module> L<Parse::Keyword|Parse::Keyword>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.08>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Aug  7 14:13:40 2015: C<Module> L<Import::Into|Import::Into>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.002004>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Aug  7 14:13:43 2015: C<Module> L<Data::Alias|Data::Alias>
 
 =over 4
 
@@ -900,7 +680,7 @@ C<EXE_FILES: >
 
 =back
 
-=head2 Fri Aug  7 11:58:27 2015: C<Module> L<Sub::Name|Sub::Name>
+=head2 Fri Aug  7 14:13:43 2015: C<Module> L<Return::Type|Return::Type>
 
 =over 4
 
@@ -914,7 +694,7 @@ C<LINKTYPE: dynamic>
 
 =item *
 
-C<VERSION: 0.14>
+C<VERSION: 0.005>
 
 =item *
 
@@ -922,29 +702,7 @@ C<EXE_FILES: >
 
 =back
 
-=head2 Fri Aug  7 11:58:27 2015: C<Module> L<namespace::sweep|namespace::sweep>
-
-=over 4
-
-=item *
-
-C<installed into: /home/awwaiid/icfp/local/lib/perl5>
-
-=item *
-
-C<LINKTYPE: dynamic>
-
-=item *
-
-C<VERSION: 0.006>
-
-=item *
-
-C<EXE_FILES: >
-
-=back
-
-=head2 Fri Aug  7 11:58:28 2015: C<Module> L<PadWalker|PadWalker>
+=head2 Fri Aug  7 14:13:44 2015: C<Module> L<PadWalker|PadWalker>
 
 =over 4
 
@@ -966,7 +724,7 @@ C<EXE_FILES: >
 
 =back
 
-=head2 Fri Aug  7 11:58:29 2015: C<Module> L<Sub::Infix|Sub::Infix>
+=head2 Fri Aug  7 14:13:45 2015: C<Module> L<Sub::Infix|Sub::Infix>
 
 =over 4
 
@@ -988,7 +746,7 @@ C<EXE_FILES: >
 
 =back
 
-=head2 Fri Aug  7 11:58:30 2015: C<Module> L<match::simple|match::simple>
+=head2 Fri Aug  7 14:13:46 2015: C<Module> L<match::simple|match::simple>
 
 =over 4
 
@@ -1010,7 +768,51 @@ C<EXE_FILES: >
 
 =back
 
-=head2 Fri Aug  7 11:58:30 2015: C<Module> L<Kavorka|Kavorka>
+=head2 Fri Aug  7 14:13:47 2015: C<Module> L<Sub::Name|Sub::Name>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.14>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Aug  7 14:13:48 2015: C<Module> L<namespace::sweep|namespace::sweep>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.006>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Aug  7 14:13:48 2015: C<Module> L<Kavorka|Kavorka>
 
 =over 4
 
@@ -1032,7 +834,117 @@ C<EXE_FILES: >
 
 =back
 
-=head2 Fri Aug  7 11:58:30 2015: C<Module> L<Moops|Moops>
+=head2 Fri Aug  7 14:13:49 2015: C<Module> L<Devel::StrictMode|Devel::StrictMode>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.003>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Aug  7 14:13:49 2015: C<Module> L<PerlX::Assert|PerlX::Assert>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.904>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Aug  7 14:13:51 2015: C<Module> L<Test::LeakTrace|Test::LeakTrace>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.15>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Aug  7 14:13:52 2015: C<Module> L<Lexical::Accessor|Lexical::Accessor>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.008>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Aug  7 14:13:52 2015: C<Module> L<MooseX::MungeHas|MooseX::MungeHas>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.007>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Aug  7 14:13:53 2015: C<Module> L<Moops|Moops>
 
 =over 4
 
@@ -1054,7 +966,73 @@ C<EXE_FILES: >
 
 =back
 
-=head2 Fri Aug  7 12:37:18 2015: C<Module> L<Data::Dump|Data::Dump>
+=head2 Fri Aug  7 14:13:55 2015: C<Module> L<Cpanel::JSON::XS|Cpanel::JSON::XS>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 3.0115>
+
+=item *
+
+C<EXE_FILES: bin/cpanel_json_xs>
+
+=back
+
+=head2 Fri Aug  7 14:13:56 2015: C<Module> L<JSON::MaybeXS|JSON::MaybeXS>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 1.003005>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Aug  7 14:13:56 2015: C<Module> L<File::Slurp|File::Slurp>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 9999.19>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Aug  7 14:13:57 2015: C<Module> L<Data::Dump|Data::Dump>
 
 =over 4
 
@@ -1069,6 +1047,28 @@ C<LINKTYPE: dynamic>
 =item *
 
 C<VERSION: 1.23>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+
+=head2 Fri Aug  7 14:13:58 2015: C<Module> L<PHP|PHP>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 0.15>
 
 =item *
 

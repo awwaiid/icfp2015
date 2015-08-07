@@ -1,1 +1,1 @@
-{"dist":"match-simple-0.009","name":"match::simple","pathname":"T/TO/TOBYINK/match-simple-0.009.tar.gz","target":"match::simple","version":"0.009","provides":{"match::simple":{"file":"lib/match/simple.pm","version":"0.009"},"match::smart":{"file":"lib/match/smart.pm","version":"0.009"}}}
+{"provides":{"match::smart":{"version":"0.009","file":"lib/match/smart.pm"},"match::simple":{"file":"lib/match/simple.pm","version":"0.009"}},"pathname":"T/TO/TOBYINK/match-simple-0.009.tar.gz","name":"match::simple","version":"0.009","dist":"match-simple-0.009","target":"match::simple"}

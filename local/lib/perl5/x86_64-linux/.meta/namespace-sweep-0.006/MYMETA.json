@@ -4,7 +4,7 @@
       "Mike Friedman <friedo@friedo.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300026, CPAN::Meta::Converter version 2.120921, CPAN::Meta::Converter version 2.150005",
+   "generated_by" : "Dist::Zilla version 4.300026, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -55,6 +55,5 @@
          "web" : "http://github.com/friedo/perl-namespace-sweep"
       }
    },
-   "version" : "0.006",
-   "x_serialization_backend" : "JSON::PP version 2.27203"
+   "version" : "0.006"
 }

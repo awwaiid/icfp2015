@@ -4,7 +4,7 @@
       "Toby Inkster (TOBYINK) <tobyink@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Inkt::Profile::TOBYINK version 0.023, CPAN::Meta::Converter version 2.142690, CPAN::Meta::Converter version 2.150005",
+   "generated_by" : "Dist::Inkt::Profile::TOBYINK version 0.023, CPAN::Meta::Converter version 2.142690, CPAN::Meta::Converter version 2.120921",
    "keywords" : [],
    "license" : [
       "perl_5"
@@ -184,7 +184,8 @@
          "version" : "0.036"
       },
       "MooseX::KavorkaInfo::DummyInfo" : {
-         "file" : "lib/MooseX/KavorkaInfo.pm"
+         "file" : "lib/MooseX/KavorkaInfo.pm",
+         "version" : "0"
       },
       "MooseX::KavorkaInfo::Trait::Method" : {
          "file" : "lib/MooseX/KavorkaInfo.pm",
@@ -223,6 +224,5 @@
       "Piers Cawley (PDCAWLEY) <pdcawley@cpan.org>",
       "Thibaut Le Page (THILP) <thilp@cpan.org>",
       "Chris Tijerina (CAMSPI) <camspi@cpan.org>"
-   ],
-   "x_serialization_backend" : "JSON::PP version 2.27203"
+   ]
 }

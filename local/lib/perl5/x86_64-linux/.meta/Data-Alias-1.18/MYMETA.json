@@ -5,7 +5,7 @@
       "Andrew Main (Zefram) <zefram@fysh.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Module::Install version 0.67, CPAN::Meta::Converter version 2.150005",
+   "generated_by" : "Module::Install version 0.67, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -26,16 +26,10 @@
             "ExtUtils::MakeMaker" : "0"
          }
       },
-      "configure" : {
-         "requires" : {
-            "ExtUtils::MakeMaker" : "0"
-         }
-      },
       "runtime" : {
          "requires" : {}
       }
    },
    "release_status" : "stable",
-   "version" : "1.18",
-   "x_serialization_backend" : "JSON::PP version 2.27203"
+   "version" : "1.18"
 }

@@ -4,7 +4,7 @@
       "Dave Rolsky <autarch@urth.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 5.023, CPAN::Meta::Converter version 2.142690, CPAN::Meta::Converter version 2.150005",
+   "generated_by" : "Dist::Zilla version 5.023, CPAN::Meta::Converter version 2.142690, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "artistic_2"
    ],
@@ -650,6 +650,5 @@
       "David Cantrell <david@cantrell.org.uk>",
       "Graham Knop <haarg@haarg.org>",
       "Ricardo Signes <rjbs@cpan.org>"
-   ],
-   "x_serialization_backend" : "JSON::PP version 2.27203"
+   ]
 }
