@@ -1,8 +1,8 @@
 #!/usr/bin/env perl
 
-use v5.20;
-use feature qw(signatures);
-no warnings qw(experimental::signatures);
+use v5.18;
+# use feature qw(signatures);
+# no warnings qw(experimental::signatures);
 
 use lib 'local/lib/perl5';
 use lib 'lib';
@@ -45,6 +45,46 @@ class Board {
         ->{ $fill->{y} } = 1;
     }
   }
+  method BUILD($args) {
+    $self->fill_from_problem($args->{problem_filled});
+  }
+
+  method to_json {
+    return {
+      width => $self->width,
+      height => $self->height,
+      filled => $self->filled,
+      map => $self->to_array
+    };
+  }
+}
+
+class Unit extends Board {
+  use List::Util qw( max );
+  has pivot => (is => 'rw');
+  has orientation => (is => 'rw', default => 0);
+  method guess_width {
+    my $x_vals = {};
+    # $y_vals = {};
+    foreach my $x (keys %{$self->filled}) {
+      $x_vals->{$x} = 1;
+      # foreach my $y (keys %{$self->filled->{$x}}) {
+      #   $x_vals->{$y} = 1;
+      # }
+    }
+    (max keys %$x_vals) + 1; # min is 1
+  }
+
+  around to_json {
+    return {
+      width => $self->width,
+      height => $self->height,
+      filled => $self->filled,
+      map => $self->to_array,
+      pivot => $self->pivot,
+      orientation => $self->orientation,
+    };
+  }
 }
 
 my $problem_raw = read_file($ARGV[0]);
@@ -53,27 +93,36 @@ my $problem = decode_json($problem_raw);
 my $solution_raw = read_file($ARGV[0]);
 my $solution = decode_json($solution_raw);
 
-say "size: $problem->{height} x $problem->{width}";
+# say "size: $problem->{height} x $problem->{width}";
 my $source_length = $problem->{sourceLength};
-say "source length: $source_length";
+# say "source length: $source_length";
 
 my $board = Board->new(
   width => $problem->{width},
-  height => $problem->{height}
+  height => $problem->{height},
+  problem_filled => $problem->{filled}
 );
-$board->fill_from_problem($problem->{filled});
-dd($board);
+# $board->fill_from_problem($problem->{filled});
+# dd($board);
 say encode_json($board->to_array);
 
-foreach my $seed (@{$problem->{sourceSeeds}}) {
-  say "Seed: $seed";
-  LCG::srand($seed);
-  my $source_count = 0;
-  my $unit_count = length($problem->{units});
-  for (0..$source_length) {
-    say "Unit: " . (LCG::rand() % $unit_count);
-  }
-}
+# my $units = [];
+# foreach my $problem_unit (@{$problem->{units}}) {
+#   my $unit = Unit->new(problem_filled => $problem_unit->{members});
+#   say JSON::MaybeXS->new->allow_blessed->encode($unit);
+#   dd $unit->to_json;
+#   push @$units, $unit;
+# }
+
+# foreach my $seed (@{$problem->{sourceSeeds}}) {
+#   say "Seed: $seed";
+#   LCG::srand($seed);
+#   my $source_count = 0;
+#   my $unit_count = length($problem->{units});
+#   for (0..$source_length) {
+#     say "Unit: " . (LCG::rand() % $unit_count);
+#   }
+# }
 
 
 
