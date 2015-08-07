@@ -1,1 +1,0 @@
-{"target":"true","dist":"true-0.18","pathname":"C/CH/CHOCOLATE/true-0.18.tar.gz","provides":{"true::VERSION":{"file":"lib/true/VERSION.pm","version":"0.18"},"true":{"file":"lib/true.pm","version":"0.18"}},"name":"true","version":"0.18"}

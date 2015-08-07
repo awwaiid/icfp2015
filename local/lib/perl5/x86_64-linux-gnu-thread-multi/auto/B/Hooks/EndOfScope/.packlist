@@ -1,0 +1,13 @@
+/home/borbyu/src/icfp2015/local/lib/perl5/B/Hooks/EndOfScope.pm
+/home/borbyu/src/icfp2015/local/lib/perl5/B/Hooks/EndOfScope/PP.pm
+/home/borbyu/src/icfp2015/local/lib/perl5/B/Hooks/EndOfScope/PP/FieldHash.pm
+/home/borbyu/src/icfp2015/local/lib/perl5/B/Hooks/EndOfScope/PP/HintHash.pm
+/home/borbyu/src/icfp2015/local/lib/perl5/B/Hooks/EndOfScope/XS.pm
+/usr/local/man/man3/B::Hooks::EndOfScope.3pm
+/usr/local/man/man3/B::Hooks::EndOfScope::PP.3pm
+/usr/local/man/man3/B::Hooks::EndOfScope::XS.3pm
+/usr/local/share/perl/5.18.2/B/Hooks/EndOfScope.pm
+/usr/local/share/perl/5.18.2/B/Hooks/EndOfScope/PP.pm
+/usr/local/share/perl/5.18.2/B/Hooks/EndOfScope/PP/FieldHash.pm
+/usr/local/share/perl/5.18.2/B/Hooks/EndOfScope/PP/HintHash.pm
+/usr/local/share/perl/5.18.2/B/Hooks/EndOfScope/XS.pm
