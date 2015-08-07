@@ -13,9 +13,9 @@ sub srand {
 }
 
 sub rand {
-  ($seed, my $r) = gen_bsd();
-  $r //= $seed;
-  return ($r & 0xFFFF0000) >> 16;
+  my $retval = ($seed & 0xFFFF0000) >> 16;
+  $seed = gen_bsd();
+  return $retval;
 }
 
 1;
