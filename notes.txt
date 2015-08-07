@@ -4,3 +4,6 @@ Ei!
 
 # Longest is 51 chars
 
+api URL: https://davar.icfpcontest.org/teams/72/solutions
+api token: YNLCZqJz/CBlN+jALQIxjKpiTd75GfCpwF+iXhjW3nk=
+
