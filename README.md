@@ -2,4 +2,5 @@
 
 The Wrath of Isa
 
+irc.freenode.net / #thewrathofisa
 
