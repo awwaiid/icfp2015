@@ -8,6 +8,7 @@ use JSON::MaybeXS;
 use File::Slurp;
 use LCG;
 use Data::Dump;
+use IPC::Open2;
 
 use Moops;
 
@@ -17,8 +18,6 @@ if($ARGV[0] eq '-d') {
   shift @ARGV;
 }
 
-
-# srand(0);
 
 class Board {
   has width => (is => 'rw');
@@ -143,39 +142,43 @@ class Unit extends Board {
   method real_positions {
     my $positions = [];
 
-    my $pivot_x = $self->{pivot}->[0];
-    my $pivot_y = $self->{pivot}->[1];
+    my $pivot_x = $self->pivot->[0];
+    my $pivot_y = $self->pivot->[1];
 
     my $pivot_xx = $pivot_x - ($pivot_y - ($pivot_y & 1)) / 2;
     my $pivot_zz = $pivot_y;
     my $pivot_yy = -$pivot_xx - $pivot_zz;
 
+    say "pivot: $pivot_x, $pivot_y -> $pivot_xx, $pivot_yy, $pivot_zz" if $debug;
+
     foreach my $x (keys %{$self->filled}) {
       foreach my $y (keys %{$self->filled->{$x}}) {
-        my $pos_x = $self->x_position;
-        my $pos_y = $self->y_position;
+        my $x = $x - $pivot_x;
+        my $y = $y - $pivot_y;
 
-        say "relative: $pos_x,$pos_y" if $debug;
+        # say "relative: $x,$y" if $debug && $self->orientation;
 
-        my $pos_xx = ($pos_x - ($pos_y - ($pos_y & 1)) / 2) - $pivot_xx;
-        my $pos_zz = $pos_y - $pivot_zz;
-        my $pos_yy = (-$pos_xx - $pos_zz) - $pivot_yy;
+        my $xx = $x - ($y - ($y & 1)) / 2;
+        my $zz = $y;
+        my $yy = -$xx - $zz;
 
         for (1..$self->orientation) {
-          # print "rotate: $pos_xx, $pos_yy, $pos_zz -> ";
-          $pos_xx, $pos_yy, $pos_zz = -$pos_zz, -$pos_xx, -$pos_yy;
-          # say "$pos_xx, $pos_yy, $pos_zz";
+          # print "rotate: $x,$y -> $xx,$yy,$zz -> ";
+          ($xx, $yy, $zz) = (-$zz, -$xx, -$yy);
+          my $mx = $xx + ($zz - ($zz & 1)) / 2;
+          my $my = $zz;
+          # say "$xx,$yy,$zz -> $mx,$my                        ";
         }
 
-        $pos_x = $pos_xx + ($pos_zz - ($pos_zz & 1)) / 2;
-        $pos_y = $pos_zz;
+        $x = $xx + ($zz - ($zz & 1)) / 2 + $pivot_x;
+        $y = $zz + $pivot_y;
 
-        say "rotated: $pos_x,$pos_y" if $debug;
+        # say "rotated: $x,$y" if $debug && $self->orientation;
 
         push @$positions, [
           # This is ... crazy
-          $x + $pos_x + (($pos_y % 2) * ($y % 2)) - ($pos_y % 2),
-          $y + $pos_y
+          $x + $self->x_position + (($self->y_position % 2) * ($y % 2)) - ($self->y_position % 2),
+          $y + $self->y_position
         ];
       }
     }
@@ -378,24 +381,15 @@ my $board = Board->new(
 
 my $units = [];
 foreach my $problem_unit (@{$problem->{units}}) {
-  my $unit = Unit->new(problem_filled => $problem_unit->{members});
+  my $unit = Unit->new(
+    problem_filled => $problem_unit->{members},
+    pivot => [
+      $problem_unit->{pivot}->{x},
+      $problem_unit->{pivot}->{y},
+    ]);
   push @$units, $unit;
 }
 
-use Term::ReadKey;
-sub get_move {
-  ReadMode 3;
-  my $move = ReadKey;
-  chomp $move;
-  return {
-    's' => 'W',
-    'x' => 'SW',
-    'c' => 'SE',
-    'f' => 'E'
-  }->{$move};
-}
-
-use IPC::Open2;
 
 foreach my $seed (@{$problem->{sourceSeeds}}) {
   say "Seed: $seed" if $debug;
@@ -413,11 +407,6 @@ foreach my $seed (@{$problem->{sourceSeeds}}) {
   $world->next_unit;
   while(1) {
     $world->viz_map if $debug;
-    # Random moves!
-    # $world->move({ 0 => 'W', 1 => 'E', 2 => 'SW', 3 => 'SE' }->{int rand 4})
-    # $world->move({ 0 => 'SW', 1 => 'SE' }->{int rand 2});
-    # $world->move(get_move());
-
     say "sending world to bot" if $debug;
     $to_bot->say(encode_json($world->to_json));
     say "getting command from bot" if $debug;
