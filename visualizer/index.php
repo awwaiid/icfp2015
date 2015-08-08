@@ -1,19 +1,27 @@
 <?php
 
-if (isset($_GET)) {
 	if (isset($_GET['startServer'])) {
-		$cmd = '../verify.pl problems/problem_0.json ./httpbot.pl';
-		echo 'foobar';
-		echo shell_exec($cmd . " &");
+		$path  = realpath(__DIR__. '/../');
+		$problem = 'problems/problem_0.json';
+		$bot = 'httpbot.pl';
+		$cmd = "echo '" . $path . "/verify.pl " . $path . "/" . $problem . " " . $path . "/" . $bot . " &' | at now >/dev/null 2>&1";
+		echo ($cmd);
+		echo (shell_exec($cmd));
+		exit;
 	}
-	exit;
-}
 
+	if (isset($_GET['checkServer'])) {
+		$path  = realpath(__DIR__. '/../');
+		$cmd = 'ps cax | grep verify';		
+		echo (system($cmd, $returnStatus));
+		echo ($returnStatus) ? 'not started' : 'started';
+		exit;
+	}
 ?>
 
 <!DOCTYPE html>
 <head>
-    <title>Hex</title>
+    <title>Hex Player</title>
     <script src="hexagon.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </head>
@@ -21,6 +29,8 @@ if (isset($_GET)) {
 	<hr>
 	<button onClick="location.reload()">Start Over</button>
 	<button onClick="startServer()">Start Server</button>
+		<button onClick="checkServer()">Check Server</button>
+
 
 	<hr>
 	<pre id="result"></pre>
@@ -36,6 +46,11 @@ if (isset($_GET)) {
     <script>
 
     	function getMap(cmd) {
+
+    		if (checkServer() == false) {
+    			startServer();
+    		}
+
     		if (cmd == 'undefinded') {
     			cmd = 'E';
     		}
@@ -56,6 +71,16 @@ if (isset($_GET)) {
 
     	function startServer() {
     		$.get("http://localhost:8888/?startServer=1");
+    	}
+
+    	function checkServer() {
+    		var started = false
+    		$.get("http://localhost:8888/?checkServer=1", function (data) {
+    			if (data == 'started') {
+    				started = true;
+    			} 
+    		});
+    		return started;
     	}
     </script>
 </body>
