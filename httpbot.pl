@@ -25,6 +25,7 @@ sub main {
       "Cache-Control: private, no-store, no-cache\r\n",
       "Pragma: no-cache\r\n",
       "Expires: 0\r\n",
+      "Access-Control-Allow-Origin: *\r\n",
       "Content-type: application/json\r\n",
       "\r\n"
     );
