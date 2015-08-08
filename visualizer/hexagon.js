@@ -7,8 +7,14 @@ function HexagonGrid(canvasId, radius) {
     this.width = 2 * radius;
     this.side = (3 / 2) * radius;
 
+
+    this.height = 2 * radius;
+    this.width = Math.sqrt(3) * radius;
+    this.side = (3/2) * radius;
+
     this.canvas = document.getElementById(canvasId);
     this.context = this.canvas.getContext('2d');
+    //this.context.rotate(1);
 
     this.canvasOriginX = 0;
     this.canvasOriginY = 0;
@@ -22,7 +28,7 @@ HexagonGrid.prototype.drawHexGrid = function (rows, cols, originX, originY, map,
     
     var currentHexX;
     var currentHexY;
-    var debugText = "";
+    var debugText;
 
     var offsetColumn = false;
 
@@ -30,18 +36,18 @@ HexagonGrid.prototype.drawHexGrid = function (rows, cols, originX, originY, map,
         for (var row = 0; row < rows; row++) {
             color = "#ddd";
             if (!offsetColumn) {
-                currentHexX = (col * this.side) + originX;
-                currentHexY = (row * this.height) + originY;
+                currentHexY = (col * this.side) + originY;
+                currentHexX = (row * this.width) + originX;
             } else {
-                currentHexX = col * this.side + originX;
-                currentHexY = (row * this.height) + originY + (this.height * 0.5);
+                currentHexY = col * this.side + originY;
+                currentHexX = (row * this.width) + originX + (this.width * 0.5);
             }
 
             if (isDebug) {
-                debugText = col + "," + row;
+                debugText = row + "," + col;
             }
 
-            var cell = map[row][col];
+            var cell = map[col][row];
 
             if (cell == 'F') {
                 color = "#444";
@@ -66,12 +72,13 @@ HexagonGrid.prototype.drawHexAtColRow = function(column, row, color) {
 HexagonGrid.prototype.drawHex = function(x0, y0, fillColor, debugText) {
     this.context.strokeStyle = "#000";
     this.context.beginPath();
-    this.context.moveTo(x0 + this.width - this.side, y0);
-    this.context.lineTo(x0 + this.side, y0);
-    this.context.lineTo(x0 + this.width, y0 + (this.height / 2));
-    this.context.lineTo(x0 + this.side, y0 + this.height);
-    this.context.lineTo(x0 + this.width - this.side, y0 + this.height);
-    this.context.lineTo(x0, y0 + (this.height / 2));
+    this.context.moveTo(x0, y0);
+    this.context.lineTo(x0 + (this.width / 2), y0 - (this.radius / 2));
+    this.context.lineTo(x0 + this.width, y0);
+    this.context.lineTo(x0 + this.width, y0 + this.radius);
+    this.context.lineTo(x0 + (this.width / 2), y0 + this.radius + (this.radius / 2));
+    this.context.lineTo(x0, y0 + this.radius);
+
 
     if (fillColor) {
         this.context.fillStyle = fillColor;
@@ -84,7 +91,7 @@ HexagonGrid.prototype.drawHex = function(x0, y0, fillColor, debugText) {
     if (debugText) {
         this.context.font = "8px";
         this.context.fillStyle = "#000";
-        this.context.fillText(debugText, x0 + (this.width / 2) - (this.width/4), y0 + (this.height - 5));
+        this.context.fillText(debugText, x0 + (this.width / 2) - 7, y0 + (this.radius / 2));
     }
 };
 

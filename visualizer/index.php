@@ -12,8 +12,9 @@
 
 	if (isset($_GET['checkServer'])) {
 		$path  = realpath(__DIR__. '/../');
-		$cmd = 'ps cax | grep verify';		
-		echo (system($cmd, $returnStatus));
+		$cmd = 'ps aux | grep verify | grep -v grep' ;		
+		//echo ($cmd);
+		//echo (system($cmd, $returnStatus));
 		echo ($returnStatus) ? 'not started' : 'started';
 		exit;
 	}
@@ -35,12 +36,14 @@
 	<hr>
 	<pre id="result"></pre>
 	<div id="url"></div>
-	<button onClick="getMap();" value="getMap">Get Map</button>
+	<button onClick="getMap('E');" value="getMap">Get Map</button>
 	<hr>
 	<button onClick="getMap('W');" >W</button>
 	<button onClick="getMap('E');" >E</button>
 	<button onClick="getMap('A');" >SW</button>
 	<button onClick="getMap('F');" >SE</button>
+	<button onClick="getMap('R');" >Rotate</button>
+	<button onClick="getMap('P');" >Rotate(counter)</button>
 	<hr>
 	<canvas id="HexCanvas" width="2000" height="2000"></canvas>
     <script>
@@ -51,17 +54,20 @@
     			startServer();
     		}
 
-    		if (cmd == 'undefinded') {
+    		if (cmd == 'undefined') {
     			cmd = 'E';
     		}
-	        $.get( "http://localhost:8080/?cmd=" + cmd, function( data ) {
+	        var req = $.get( "http://localhost:8080/?cmd=" + cmd, function( data ) {
 	        	var str = JSON.stringify(data.map, null, false); 
 			 	$( "#result" ).html( str);
 			 	$("#url").html("http://localhost:8080/?cmd=" + cmd);
 			 	var height = data.board.height;
 			 	var width = data.board.width;
 			 	drawGrid(width, height, data.map);
-			}, 'json');
+			}, 'json')
+			.fail(function() {
+				$("#result").html("GAME OVER");
+			});
     	}
 
     	function drawGrid(width, height, map) {
