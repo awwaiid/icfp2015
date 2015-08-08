@@ -11,6 +11,13 @@ use Data::Dump;
 
 use Moops;
 
+my $debug = 1;
+if($ARGV[0] eq '-d') {
+  $debug = 1;
+  shift @ARGV;
+}
+
+
 # srand(0);
 
 class Board {
@@ -162,7 +169,7 @@ class Unit extends Board {
 
 
   method move($direction) {
-    say "cur pos: " . $self->x_position . "," . $self->y_position;
+    # say "cur pos: " . $self->x_position . "," . $self->y_position;
     $self->prev_position([ @{ $self->position } ]);
     if($direction eq 'E') {
       $self->position( [ $self->x_position + 1, $self->y_position ]);
@@ -183,9 +190,9 @@ class Unit extends Board {
     } else {
       die "Invalid direction '$direction'";
     }
-    say "new pos: " . $self->x_position . "," . $self->y_position;
+    # say "new pos: " . $self->x_position . "," . $self->y_position;
     $self->save_history;
-    say "history: @{[ keys %{$self->history} ]}";
+    # say "history: @{[ keys %{$self->history} ]}";
   }
 
   method go_back {
@@ -232,7 +239,7 @@ class World {
       $self->game_over("Source exhausted");
     }
     my $unit_num = LCG::rand() % $self->unit_count;
-    say "Unit num: $unit_num";
+    # say "Unit num: $unit_num";
     my $unit = $self->units->[$unit_num];
     $unit->reset;
     $unit->center_on($self->board->width);
@@ -351,18 +358,18 @@ foreach my $seed (@{$problem->{sourceSeeds}}) {
   my $bot_cmd = $ARGV[1];
   my ($to_bot, $from_bot);
   open2($from_bot, $to_bot, $bot_cmd);
-  print `clear`;
+  # print `clear`;
   $world->next_unit;
   while(1) {
-    $world->viz_map;
+    $world->viz_map if $debug;
     # Random moves!
     # $world->move({ 0 => 'W', 1 => 'E', 2 => 'SW', 3 => 'SE' }->{int rand 4})
     # $world->move({ 0 => 'SW', 1 => 'SE' }->{int rand 2});
     # $world->move(get_move());
 
-    say "sending world to bot";
+    say "sending world to bot" if $debug;
     $to_bot->say(encode_json($world->to_json));
-    say "getting command from bot";
+    say "getting command from bot" if $debug;
     my $move = <$from_bot>;
     chomp $move;
     $world->move($move);
