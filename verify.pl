@@ -130,6 +130,14 @@ class Unit extends Board {
     $self->height((max keys %$y_vals) + 1); # min is 1
   }
 
+  method pivot_position {
+    my ($x, $y) = @{ $self->pivot };
+    return [
+      $x + $self->x_position + (($self->y_position % 2) * ($y % 2)) - ($self->y_position % 2),
+      $y + $self->y_position
+    ];
+  }
+
   method center_on($width) {
     my $x = int(($width - $self->width) / 2);
     $self->position([$x, 0]);
@@ -194,6 +202,7 @@ class Unit extends Board {
       pivot       => $self->pivot,
       orientation => $self->orientation,
       position    => $self->position,
+      pivot_position    => $self->pivot_position,
       history     => [ map { split(',',$_) } keys %{$self->history} ],
     };
   }
@@ -252,12 +261,18 @@ class Unit extends Board {
 }
 
 class World {
+  has game_id => (is => 'rw');
+  has version_tag => (is => 'rw');
+  has seed => (is => 'rw');
+
   has board => (is => 'rw');
   has units => (is => 'rw');
   has current_unit => (is => 'rw');
   has source_count => (is => 'rw');
   has source_length => (is => 'rw');
   has score => (is => 'rw', default => 0);
+
+  has moves => (is => 'rw', default => sub { [] });
 
   method error($msg) {
     $self->score(0);
@@ -276,6 +291,15 @@ class World {
       current_unit => $self->current_unit->to_json,
       source_count => $self->source_count,
       source_length => $self->source_length,
+    };
+  }
+
+  method to_output_json {
+    return {
+      problemId => $self->game_id,
+      tag => $self->version_tag,
+      seed => $self->seed,
+      solution => join('', @{$self->moves}),
     };
   }
 
@@ -327,7 +351,25 @@ class World {
   }
 
 use Data::Dump;
+  # {p, ', !, ., 0, 3}  move W
+  # {b, c, e, f, y, 2}  move E
+  # {a, g, h, i, j, 4}  move SW
+  # {l, m, n, o, space, 5}      move SE
+  # {d, q, r, v, z, 1}  rotate clockwise
+  # {k, s, t, u, w, x}  rotate counter-clockwise
+  # \t, \n, \r  (ignored)
+  method denormalize_dir($direction) {
+    return {
+      W => 'p',
+      E => 'b',
+      A => 'a',
+      F => 'l',
+      R => 'd',
+      P => 'k'}->{$direction};
+  }
+
   method move($direction) {
+    push @{$self->moves}, $self->denormalize_dir($direction);
     my $unit_locs = $self->current_unit->real_positions;
     $self->current_unit->move($direction);
     if(! $self->is_position_valid) {
@@ -386,11 +428,17 @@ foreach my $problem_unit (@{$problem->{units}}) {
   push @$units, $unit;
 }
 
+my $version_tag = `git rev-parse --short HEAD`;
+chomp $version_tag;
+$version_tag .= "-" . time();
 
 foreach my $seed (@{$problem->{sourceSeeds}}) {
   say "Seed: $seed" if $debug;
   LCG::srand($seed);
   my $world = World->new(
+    game_id => $problem->{id},
+    version_tag => $version_tag,
+    seed => $seed,
     board => $board,
     units => $units,
     source_count => 0,
@@ -412,6 +460,8 @@ foreach my $seed (@{$problem->{sourceSeeds}}) {
     foreach my $move (@moves) {
       $world->move($move);
     }
+    open my $result, '>', 'result.json';
+    $result->say(encode_json([$world->to_output_json]));
   }
   last;
 }
