@@ -75,7 +75,6 @@ class Board {
         $all_filled &&= $self->filled->{$x}{$y};
       }
       $self->clear_row($y) if $all_filled;
-      $self->rowsCleared($self->rowsCleared + 1);
     }
   }
 
@@ -99,6 +98,8 @@ class Board {
     foreach my $x (0..$self->width-1) {
       delete $self->filled->{$x}{0};
     }
+    $self->rowsCleared($self->rowsCleared + 1);
+
   }
 
 }
@@ -295,7 +296,7 @@ class World {
     my $points = $cell_size + 100 * (1 + $lines_cleared) * $lines_cleared / 2;
     my $line_bonus = 0;
     if ($self->prev_lines_cleared > 1) {
-        $line_bonus = floor(($self->prev_lines_cleared - 1) * $points / 10);
+        $line_bonus = int(($self->prev_lines_cleared - 1) * $points / 10);
     } 
     my $score = $points + $line_bonus;
     $self->score($self->score + $score);
@@ -396,7 +397,7 @@ use Data::Dump;
         $self->board->lock(@$loc);
       }
       $self->board->clear_full_rows;
-      $self->addToScore(count($self->current_unit->real_positions), $self->board->getRowsCleared());
+      $self->addToScore(scalar(@{$self->current_unit->real_positions}), $self->board->getRowsCleared());
       $self->prev_lines_cleared($self->board->getRowsCleared());
       $self->next_unit;
     }
