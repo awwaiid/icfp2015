@@ -2,14 +2,18 @@
 
 use v5.18;
 
-use lib 'local/lib/perl5';
-use lib 'lib';
+use File::Basename;
+use File::Spec;
+my $dirname;
+BEGIN { $dirname = dirname(File::Spec->rel2abs( __FILE__ )) }
+use lib "$dirname/local/lib/perl5";
+use lib "$dirname/lib";
+
 use JSON::MaybeXS;
 use File::Slurp;
 use LCG;
 use Data::Dump;
 use IPC::Open2;
-
 use Moops;
 
 our $debug = 0;

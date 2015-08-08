@@ -1,8 +1,13 @@
 #!/usr/bin/env perl
 
 use v5.18;
-use lib 'local/lib/perl5';
-use lib 'lib';
+use File::Basename;
+use File::Spec;
+my $dirname;
+BEGIN { $dirname = dirname(File::Spec->rel2abs( __FILE__ )) }
+use lib "$dirname/local/lib/perl5";
+use lib "$dirname/lib";
+
 use Term::ReadKey;
 
 sub get_move {
