@@ -110,14 +110,15 @@
 			 	if (cmd == 'F') var move = 'SE';
 			 	else if (cmd == 'A') var move = 'SW';
 			 	else var move = cmd;
-			 	
-			 	$("#url").html("Last Move: " + move);
+			 				 	
+			 	var pivot = data.current_unit.pivot_position;
+
+			 	$("#url").html("Last Move: " + move + " Pivot: " + pivot[0] + ',' +pivot[1]);
 			 	var height = data.board.height;
 			 	var width = data.board.width;
 			 	var source_count = data.source_count;
 			 	var source_length = data.source_length;
 
-			 	var pivot = data.current_unit.pivot_position;
 
 			 	$("#progress").html("Progress: " + source_count + "/" + source_length);
 			 	drawGrid(width, height, data.map, pivot);

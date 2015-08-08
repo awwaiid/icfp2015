@@ -19,12 +19,15 @@ function HexagonGrid(canvasId, radius) {
     this.canvasOriginX = 0;
     this.canvasOriginY = 0;
     
-    this.canvas.addEventListener("mousedown", this.clickEvent.bind(this), false);
+    //this.canvas.addEventListener("mousedown", this.clickEvent.bind(this), false);
 };
 
 HexagonGrid.prototype.drawHexGrid = function (rows, cols, originX, originY, map, pivot, isDebug) {
     this.canvasOriginX = originX;
     this.canvasOriginY = originY;
+
+    this.rowLength = rows;
+    this.colLength = cols;
     
     var currentHexX;
     var currentHexY;
@@ -50,17 +53,19 @@ HexagonGrid.prototype.drawHexGrid = function (rows, cols, originX, originY, map,
             var cell = map[col][row];
 
             if (cell == 'F') {
-                color = "#444";
+                color = "#";
             }
             if (cell == 'U') {
-                color = "#000";
+                color = "#333";
             }
 
             if (row == pivot[0] && col == pivot[1]) {
-                color = "#aaa";
+                var ispivot = true;
+            } else {
+                var ispivot = false;
             }
 
-            this.drawHex(currentHexX, currentHexY, color, debugText);
+            this.drawHex(currentHexX, currentHexY, color, debugText, ispivot);
         }
         offsetColumn = !offsetColumn;
     }
@@ -70,10 +75,10 @@ HexagonGrid.prototype.drawHexAtColRow = function(column, row, color) {
     var drawy = column % 2 == 0 ? (row * this.height) + this.canvasOriginY : (row * this.height) + this.canvasOriginY + (this.height / 2);
     var drawx = (column * this.side) + this.canvasOriginX;
 
-    this.drawHex(drawx, drawy, color, "");
+    this.drawHex(drawx, drawy, color, "", false);
 };
 
-HexagonGrid.prototype.drawHex = function(x0, y0, fillColor, debugText) {
+HexagonGrid.prototype.drawHex = function(x0, y0, fillColor, debugText, pivot) {
     this.context.strokeStyle = "#000";
     this.context.beginPath();
     this.context.moveTo(x0, y0);
@@ -81,12 +86,20 @@ HexagonGrid.prototype.drawHex = function(x0, y0, fillColor, debugText) {
     this.context.lineTo(x0 + this.width, y0);
     this.context.lineTo(x0 + this.width, y0 + this.radius);
     this.context.lineTo(x0 + (this.width / 2), y0 + this.radius + (this.radius / 2));
-    this.context.lineTo(x0, y0 + this.radius);
-
+    this.context.lineTo(x0, y0 + this.radius);    
 
     if (fillColor) {
         this.context.fillStyle = fillColor;
         this.context.fill();
+    }
+
+    if (pivot) {
+        this.context.beginPath();
+        this.context.arc(x0 + (this.width/2), y0 + (this.radius / 2), 5, 0, Math.PI*2, true); 
+        this.context.closePath();
+        this.context.fillStyle = "red";
+        this.context.fill();
+//        this.context.fillText("PIVOT", x0 + (this.width / 2) - 7, y0 + (this.radius / 2));
     }
 
     this.context.closePath();
@@ -209,10 +222,15 @@ HexagonGrid.prototype.clickEvent = function (e) {
     var localY = mouseY - this.canvasOriginY;
 
     var tile = this.getSelectedTile(localX, localY);
-    if (tile.column >= 0 && tile.row >= 0) {
+    //alert(tile.column + "-" + tile.row + "-" + this.colLength + "-" + this.rowLength);
+    if (tile.column >= 0 && tile.row >= 0 && tile.column < this.colLength && tile.rows < this.rowLength) {
         var drawy = tile.column % 2 == 0 ? (tile.row * this.height) + this.canvasOriginY + 6 : (tile.row * this.height) + this.canvasOriginY + 6 + (this.height / 2);
         var drawx = (tile.column * this.side) + this.canvasOriginX;
 
-        this.drawHex(drawx, drawy - 6, "rgba(110,110,70,0.3)", "ADA");
+        this.drawHex(drawx, drawy - 6, "rgba(110,110,70,0.3)", "", false);
     } 
+};
+
+HexagonGrid.prototype.drawPivot = function (x, y) {
+    this.drawHex(x, y, 'blue', 'P', true);
 };
