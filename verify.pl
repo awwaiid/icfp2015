@@ -55,6 +55,27 @@ class Board {
       map => $self->map
     };
   }
+
+  method clear_full_rows {
+    foreach my $y (0..$self->height) {
+      my $all_filled = 1;
+      foreach my $x (0..$self->width) {
+        $all_filled &&= $self->filled->{$x}{$y};
+      }
+      $self->clear_row($y) if $all_filled;
+    }
+  }
+
+  method clear_row($y) {
+    # foreach my $y (0..$y) {
+    #   my $all_filled = 1;
+    #   foreach my $x (0..$self->width) {
+    #     $all_filled &&= $self->filled->{$x}{$y};
+    #   }
+    #   # $self->clear_row($y) if $all_filled;
+    # }
+  }
+
 }
 
 class Unit extends Board {
@@ -195,7 +216,7 @@ class World {
       map => $self->map,
       board => $self->board->to_json,
       units => [ map { $_->to_json } @{$self->units} ],
-      current_unit => $self->current_unit,
+      current_unit => $self->current_unit->to_json,
       source_count => $self->source_count,
       source_length => $self->source_length,
     };
@@ -256,12 +277,9 @@ use Data::Dump;
       foreach my $loc (@$unit_locs) {
         $self->board->lock(@$loc);
       }
-      $self->clear_full_rows;
+      $self->board->clear_full_rows;
       $self->next_unit;
     }
-  }
-
-  method clear_full_rows {
   }
 
   use Time::HiRes qw( sleep );
@@ -291,8 +309,6 @@ use Data::Dump;
 my $problem_raw = read_file($ARGV[0]);
 my $problem = decode_json($problem_raw);
 
-my $solution_raw = $ARGV[1] ? read_file($ARGV[1]) : "{}";
-my $solution = decode_json($solution_raw);
 
 # say "size: $problem->{height} x $problem->{width}";
 
@@ -321,6 +337,8 @@ sub get_move {
   }->{$move};
 }
 
+use IPC::Open2;
+
 foreach my $seed (@{$problem->{sourceSeeds}}) {
   say "Seed: $seed";
   LCG::srand($seed);
@@ -330,6 +348,9 @@ foreach my $seed (@{$problem->{sourceSeeds}}) {
     source_count => 0,
     source_length => $problem->{sourceLength},
   );
+  my $bot_cmd = $ARGV[1];
+  my ($to_bot, $from_bot);
+  open2($from_bot, $to_bot, $bot_cmd);
   print `clear`;
   $world->next_unit;
   while(1) {
@@ -337,8 +358,14 @@ foreach my $seed (@{$problem->{sourceSeeds}}) {
     # Random moves!
     # $world->move({ 0 => 'W', 1 => 'E', 2 => 'SW', 3 => 'SE' }->{int rand 4})
     # $world->move({ 0 => 'SW', 1 => 'SE' }->{int rand 2});
+    # $world->move(get_move());
 
-    $world->move(get_move());
+    say "sending world to bot";
+    $to_bot->say(encode_json($world->to_json));
+    say "getting command from bot";
+    my $move = <$from_bot>;
+    chomp $move;
+    $world->move($move);
   }
   last;
 }
