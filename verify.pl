@@ -64,23 +64,39 @@ class Board {
   }
 
   method clear_full_rows {
-    foreach my $y (0..$self->height) {
+    foreach my $y (0..$self->height-1) {
       my $all_filled = 1;
-      foreach my $x (0..$self->width) {
+      foreach my $x (0..$self->width-1) {
         $all_filled &&= $self->filled->{$x}{$y};
       }
       $self->clear_row($y) if $all_filled;
     }
   }
 
-  method clear_row($y) {
-    # foreach my $y (0..$y) {
-    #   my $all_filled = 1;
-    #   foreach my $x (0..$self->width) {
-    #     $all_filled &&= $self->filled->{$x}{$y};
-    #   }
-    #   # $self->clear_row($y) if $all_filled;
-    # }
+  method clear_row($row) {
+    foreach my $y (1..$row) {
+      $y = $row - $y + 1;
+      foreach my $x (0..$self->width-1) {
+        if($y % 2) {
+          if($self->filled->{$x-1}{$y-1}) {
+            $self->filled->{$x}{$y} = 1;
+          } else {
+            delete $self->filled->{$x}{$y};
+          }
+        } else {
+          if($self->filled->{$x}{$y-1}) {
+            $self->filled->{$x}{$y} = 1;
+          } else {
+            delete $self->filled->{$x}{$y};
+          }
+        }
+      }
+    }
+
+    # Clear the top row
+    foreach my $x (0..$self->width-1) {
+      delete $self->filled->{$x}{0};
+    }
   }
 
 }
