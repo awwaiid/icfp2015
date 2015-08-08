@@ -3,6 +3,7 @@
 	if (isset($_GET['startServer'])) {
 		$path  = realpath(__DIR__. '/../');
 		$problem = 'problems/problem_0.json';
+		$problem = isset($_GET['problem']) ? $_GET['problem'] : $problem;
 		$bot = 'httpbot.pl';
 		$cmd = "echo '" . $path . "/verify.pl " . $path . "/" . $problem . " " . $path . "/" . $bot . " &' | at now >/dev/null 2>&1";
 		echo (shell_exec($cmd));
@@ -72,14 +73,15 @@
 	<hr>
 	<button onClick="stopServer(); location.reload();">Start Over</button>
 	<button onClick="startServer()">Start Server</button>
-		<button onClick="checkServer()">Check Server</button>
-
+	<button onClick="checkServer(true)">Check Server</button>
+	Problem: <input type="text" size=50 id="problem" value="problems/problem_0.json" /> 
+	<button onClick="getMap();" value="getMap">Get Map</button>
 
 	<hr>
 	<div id="progress"></div>
 	<pre id="result">GAME NOT STARTED</pre>
 	<div id="url"></div>
-	<button onClick="getMap();" value="getMap">Get Map</button>
+
 	<hr>
 	<button class="nav" onClick="getMap('W');" disabled >W</button>
 	<button class="nav" onClick="getMap('E');" disabled >E</button>
@@ -94,7 +96,8 @@
     	function getMap(cmd) {
 
     		if (checkServer() == false) {
-    			startServer();
+    			alert("You have not started the Server");
+    			return;
     		}
     		if (typeof cmd === 'undefined') {
     			var url = "http://localhost:8080";
@@ -114,13 +117,15 @@
 			 	var source_count = data.source_count;
 			 	var source_length = data.source_length;
 
+			 	var pivot = data.current_unit.pivot_position;
+
 			 	$("#progress").html("Progress: " + source_count + "/" + source_length);
-			 	drawGrid(width, height, data.map);
+			 	drawGrid(width, height, data.map, pivot);
 
 			}, 'json')
 			.fail(function() {
 				$("#result").html("GAME OVER");
-				$('nav').prop('disabled', false);
+				$('.nav').prop('disabled', true);
 				stopServer();
 			})
 			.done(function() {
@@ -129,22 +134,26 @@
 			});
     	}
 
-    	function drawGrid(width, height, map) {
+    	function drawGrid(width, height, map, pivot) {
 	        var hexagonGrid = new HexagonGrid("HexCanvas", 20);
-    	    hexagonGrid.drawHexGrid(width, height, 50, 50, map, true);
+    	    hexagonGrid.drawHexGrid(width, height, 50, 50, map, pivot, true);
     	}
 
     	function startServer() {
-    		$.get("http://localhost:8888/?startServer=1");
+    		var qp = '';
+    		if ($("#problem").val() != '') {
+    			qp = '&problem=' + $("#problem").val();
+    		}
+    		$.get("http://localhost:8888/?startServer=1" + qp);
     	}
 
-    	function checkServer() {
-    		var started = false
+    	function checkServer(alert_me) {
+    		var started = true
     		$.get("http://localhost:8888/?checkServer=1", function (data) {
-    			if (data == 'started') {
-    				started = true;
+    			if (data == 'not started') {
+    				started = false;
     			}
-    			alert(data); 
+    			if (alert_me === true) alert(data); 
     		});
     		return started;
     	}

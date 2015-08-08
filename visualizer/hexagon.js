@@ -22,7 +22,7 @@ function HexagonGrid(canvasId, radius) {
     this.canvas.addEventListener("mousedown", this.clickEvent.bind(this), false);
 };
 
-HexagonGrid.prototype.drawHexGrid = function (rows, cols, originX, originY, map, isDebug) {
+HexagonGrid.prototype.drawHexGrid = function (rows, cols, originX, originY, map, pivot, isDebug) {
     this.canvasOriginX = originX;
     this.canvasOriginY = originY;
     
@@ -54,6 +54,10 @@ HexagonGrid.prototype.drawHexGrid = function (rows, cols, originX, originY, map,
             }
             if (cell == 'U') {
                 color = "#000";
+            }
+
+            if (row == pivot[0] && col == pivot[1]) {
+                color = "#aaa";
             }
 
             this.drawHex(currentHexX, currentHexY, color, debugText);
