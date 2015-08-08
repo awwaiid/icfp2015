@@ -11,7 +11,7 @@ use Data::Dump;
 
 use Moops;
 
-my $debug = 1;
+our $debug = 0;
 if($ARGV[0] eq '-d') {
   $debug = 1;
   shift @ARGV;
@@ -142,15 +142,40 @@ class Unit extends Board {
 
   method real_positions {
     my $positions = [];
+
+    my $pivot_x = $self->{pivot}->[0];
+    my $pivot_y = $self->{pivot}->[1];
+
+    my $pivot_xx = $pivot_x - ($pivot_y - ($pivot_y & 1)) / 2;
+    my $pivot_zz = $pivot_y;
+    my $pivot_yy = -$pivot_xx - $pivot_zz;
+
     foreach my $x (keys %{$self->filled}) {
       foreach my $y (keys %{$self->filled->{$x}}) {
-        # TODO: Rotation
-        # say "x: $x, y: $y";
-        # say "xpos: " . $self->x_position . " ypos: " . $self->y_position;
+        my $pos_x = $self->x_position;
+        my $pos_y = $self->y_position;
+
+        say "relative: $pos_x,$pos_y" if $debug;
+
+        my $pos_xx = ($pos_x - ($pos_y - ($pos_y & 1)) / 2) - $pivot_xx;
+        my $pos_zz = $pos_y - $pivot_zz;
+        my $pos_yy = (-$pos_xx - $pos_zz) - $pivot_yy;
+
+        for (1..$self->orientation) {
+          # print "rotate: $pos_xx, $pos_yy, $pos_zz -> ";
+          $pos_xx, $pos_yy, $pos_zz = -$pos_zz, -$pos_xx, -$pos_yy;
+          # say "$pos_xx, $pos_yy, $pos_zz";
+        }
+
+        $pos_x = $pos_xx + ($pos_zz - ($pos_zz & 1)) / 2;
+        $pos_y = $pos_zz;
+
+        say "rotated: $pos_x,$pos_y" if $debug;
+
         push @$positions, [
           # This is ... crazy
-          $x + $self->x_position + (($self->y_position % 2) * ($y % 2)) - ($self->y_position % 2),
-          $y + $self->y_position
+          $x + $pos_x + (($pos_y % 2) * ($y % 2)) - ($pos_y % 2),
+          $y + $pos_y
         ];
       }
     }
@@ -210,13 +235,13 @@ class Unit extends Board {
         $self->position( [ $self->x_position, $self->y_position + 1]);
       }
     } elsif($direction eq 'R') {
-      die "Rotation not implemented!";
+      $self->orientation( ($self->orientation + 1) % 6 );
     } elsif($direction eq 'P') {
-      die "Rotation not implemented!";
+      $self->orientation( ($self->orientation - 1) % 6 );
     } else {
       die "Invalid direction '$direction'";
     }
-    # say "new pos: " . $self->x_position . "," . $self->y_position;
+    # say "new pos: " . $self->x_position . "," . $self->y_position . " rotate " . $self->orientation;
     $self->save_history;
     # say "history: @{[ keys %{$self->history} ]}";
   }
@@ -373,7 +398,7 @@ sub get_move {
 use IPC::Open2;
 
 foreach my $seed (@{$problem->{sourceSeeds}}) {
-  say "Seed: $seed";
+  say "Seed: $seed" if $debug;
   LCG::srand($seed);
   my $world = World->new(
     board => $board,
