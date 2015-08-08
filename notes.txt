@@ -7,6 +7,26 @@ Ei!
 api URL: https://davar.icfpcontest.org/teams/72/solutions
 api token: YNLCZqJz/CBlN+jALQIxjKpiTd75GfCpwF+iXhjW3nk=
 
+--------------
+
+E = empty
+F = filled
+U = Unit
+
+"map": [
+  ["E","E","U","E"],
+  ["E","E","E","E"],
+  ["E","E","E","E"],
+  ["E","F","F","F"]]
+
+Corresponds to:
+
+  ⬡ ⬡ * ⬡
+   ⬡ ⬡ ⬡ ⬡
+  ⬡ ⬡ ⬡ ⬡
+   ⬡ ⬢ ⬢ ⬡
+
+--------------
 
 * - * - * - * -
  * - * - * - * -
