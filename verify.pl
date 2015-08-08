@@ -168,6 +168,12 @@ class Unit extends Board {
   }
 
 
+  # W = west
+  # E = east
+  # A = South-West
+  # F = South-East
+  # R = Rotate-clockwise
+  # P = Rotate-counter-clockwise
   method move($direction) {
     # say "cur pos: " . $self->x_position . "," . $self->y_position;
     $self->prev_position([ @{ $self->position } ]);
@@ -175,18 +181,22 @@ class Unit extends Board {
       $self->position( [ $self->x_position + 1, $self->y_position ]);
     } elsif($direction eq 'W') {
       $self->position( [ $self->x_position - 1, $self->y_position ]);
-    } elsif($direction eq 'SE') {
+    } elsif($direction eq 'F') {
       if($self->y_position % 2) {
         $self->position( [ $self->x_position, $self->y_position + 1]);
       } else {
         $self->position( [ $self->x_position + 1, $self->y_position + 1]);
       }
-    } elsif($direction eq 'SW') {
+    } elsif($direction eq 'A') {
       if($self->y_position % 2) {
         $self->position( [ $self->x_position - 1, $self->y_position + 1]);
       } else {
         $self->position( [ $self->x_position, $self->y_position + 1]);
       }
+    } elsif($direction eq 'R') {
+      die "Rotation not implemented!";
+    } elsif($direction eq 'P') {
+      die "Rotation not implemented!";
     } else {
       die "Invalid direction '$direction'";
     }
@@ -385,3 +395,5 @@ foreach my $seed (@{$problem->{sourceSeeds}}) {
 
 
 #my $json_output = encode_json($data_structure);
+
+
