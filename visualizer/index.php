@@ -69,28 +69,63 @@
 
     </script>
 </head>
-<body>
-	<hr>
-	<button onClick="stopServer(); location.reload();">Start Over</button>
-	<button onClick="startServer()">Start Server</button>
-	<button onClick="checkServer(true)">Check Server</button>
-	Problem: <input type="text" size=50 id="problem" value="problems/problem_0.json" /> 
-	<button onClick="getMap();" value="getMap">Get Map</button>
+<body style="width:100%; margin:0 auto; background:#a7a09a; padding:0;">
+	<div id="wrap" style="
+		width:100%;
+		margin:0 auto;
+		background:#9c9;
+	">
+		<div id="header" style="
+			background:#ddd;
+			padding-left:120px;
+			padding-bottom: 5px;
+		">
+			<hr>
+			<button onClick="stopServer(); location.reload();">Start Over</button>
+			<button onClick="checkServer(true)">Check Server</button>
 
-	<hr>
-	<div id="progress"></div>
-	<pre id="result">GAME NOT STARTED</pre>
-	<div id="url"></div>
+			<hr>
+			<div id="progress"></div>
+			<pre id="result">GAME NOT STARTED</pre>
+			<div id="url"></div>
 
-	<hr>
-	<button class="nav" onClick="getMap('W');" disabled >W</button>
-	<button class="nav" onClick="getMap('E');" disabled >E</button>
-	<button class="nav" onClick="getMap('A');" disabled >SW</button>
-	<button class="nav" onClick="getMap('F');" disabled >SE</button>
-	<button class="nav" onClick="getMap('R');" disabled >Rotate</button>
-	<button class="nav" onClick="getMap('P');" disabled >Rotate(counter)</button>
-	<hr>
-	<canvas id="HexCanvas" width="2000" height="2000"></canvas>
+			<hr>
+			<button onClick="getMap();" value="play">Play</button>
+			<button class="nav" onClick="getMap('W');" disabled >W</button>
+			<button class="nav" onClick="getMap('E');" disabled >E</button>
+			<button class="nav" onClick="getMap('A');" disabled >SW</button>
+			<button class="nav" onClick="getMap('F');" disabled >SE</button>
+			<button class="nav" onClick="getMap('R');" disabled >Rotate</button>
+			<button class="nav" onClick="getMap('P');" disabled >Rotate(counter)</button>
+		</div>
+		<div id="left" style="
+			position:absolute; 
+			width=100px; 
+			background:#9c9;
+		">
+			<div>
+				<h7>Problems:</h7>
+				<?php 
+					$problems = scandir('../problems');
+					if (is_array($problems)) {
+						foreach ($problems as $problem) {
+							if (strpos($problem, 'json')) {
+								echo '<br><button width=100 class="problem" onClick="startServer(\'problems/' 
+									. $problem 
+									. '\');">' . $problem . '</button>';
+							}
+						}
+					}
+				?>
+			</div>
+		</div>
+		
+		<div id="right" style="margin-left:120px; background:#5a9;">
+			
+			<hr>
+			<canvas id="HexCanvas" width="3000" height="3000"></canvas>
+		</div>
+	</div>
     <script>
 
     	function getMap(cmd) {
@@ -140,9 +175,11 @@
     	    hexagonGrid.drawHexGrid(width, height, 50, 50, map, pivot, true);
     	}
 
-    	function startServer() {
+    	function startServer(problem) {
     		var qp = '';
-    		if ($("#problem").val() != '') {
+    		if (typeof problem !== 'undefined') {
+    			qp = '&problem=' + problem;
+    		} else if ($("#problem").val() != '') {
     			qp = '&problem=' + $("#problem").val();
     		}
     		$.get("http://localhost:8888/?startServer=1" + qp);
