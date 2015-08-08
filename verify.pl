@@ -76,18 +76,10 @@ class Board {
     foreach my $y (1..$row) {
       $y = $row - $y + 1;
       foreach my $x (0..$self->width-1) {
-        if($y % 2) {
-          if($self->filled->{$x-1}{$y-1}) {
-            $self->filled->{$x}{$y} = 1;
-          } else {
-            delete $self->filled->{$x}{$y};
-          }
+        if($self->filled->{$x}{$y-1}) {
+          $self->filled->{$x}{$y} = 1;
         } else {
-          if($self->filled->{$x}{$y-1}) {
-            $self->filled->{$x}{$y} = 1;
-          } else {
-            delete $self->filled->{$x}{$y};
-          }
+          delete $self->filled->{$x}{$y};
         }
       }
     }
@@ -149,7 +141,7 @@ class Unit extends Board {
     my $pivot_zz = $pivot_y;
     my $pivot_yy = -$pivot_xx - $pivot_zz;
 
-    say "pivot: $pivot_x, $pivot_y -> $pivot_xx, $pivot_yy, $pivot_zz" if $debug;
+    # say "pivot: $pivot_x, $pivot_y -> $pivot_xx, $pivot_yy, $pivot_zz" if $debug;
 
     foreach my $x (keys %{$self->filled}) {
       foreach my $y (keys %{$self->filled->{$x}}) {
