@@ -11,7 +11,7 @@ use Data::Dump;
 
 use Moops;
 
-srand(0);
+# srand(0);
 
 class Board {
   has width => (is => 'rw');
@@ -276,7 +276,7 @@ use Data::Dump;
       foreach my $col (@$row) {
         print " ";
         print $col eq 'E'
-        ? "\e[37m◇\e[0m"  # grey
+        ? "\e[90m◇\e[0m"  # grey
         : $col eq 'F'
         ? "\e[32m◆\e[0m"  # green
         : "\e[91m◆\e[0m"; # red
@@ -284,7 +284,7 @@ use Data::Dump;
       print "\n";
     }
     print "\n";
-    sleep 0.25;
+    # sleep 0.25;
   }
 }
 
@@ -308,6 +308,18 @@ foreach my $problem_unit (@{$problem->{units}}) {
   push @$units, $unit;
 }
 
+use Term::ReadKey;
+sub get_move {
+  ReadMode 3;
+  my $move = ReadKey;
+  chomp $move;
+  return {
+    's' => 'W',
+    'x' => 'SW',
+    'c' => 'SE',
+    'f' => 'E'
+  }->{$move};
+}
 
 foreach my $seed (@{$problem->{sourceSeeds}}) {
   say "Seed: $seed";
@@ -324,7 +336,9 @@ foreach my $seed (@{$problem->{sourceSeeds}}) {
     $world->viz_map;
     # Random moves!
     # $world->move({ 0 => 'W', 1 => 'E', 2 => 'SW', 3 => 'SE' }->{int rand 4})
-    $world->move({ 0 => 'SW', 1 => 'SE' }->{int rand 2});
+    # $world->move({ 0 => 'SW', 1 => 'SE' }->{int rand 2});
+
+    $world->move(get_move());
   }
   last;
 }

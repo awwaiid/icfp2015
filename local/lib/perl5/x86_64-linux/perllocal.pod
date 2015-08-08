@@ -1054,3 +1054,25 @@ C<EXE_FILES: >
 
 =back
 
+=head2 Fri Aug  7 19:35:13 2015: C<Module> L<Term::ReadKey|Term::ReadKey>
+
+=over 4
+
+=item *
+
+C<installed into: /home/awwaiid/icfp/local/lib/perl5>
+
+=item *
+
+C<LINKTYPE: dynamic>
+
+=item *
+
+C<VERSION: 2.33>
+
+=item *
+
+C<EXE_FILES: >
+
+=back
+

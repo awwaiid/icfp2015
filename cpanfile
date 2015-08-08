@@ -7,3 +7,4 @@ requires 'Cpanel::JSON::XS';
 requires 'File::Slurp';
 requires 'Moops';
 requires 'Data::Dump';
+requires 'Term::ReadKey';
