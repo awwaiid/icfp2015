@@ -5,7 +5,7 @@
 		$problem = 'problems/problem_0.json';
 		$problem = isset($_GET['problem']) ? $_GET['problem'] : $problem;
 		$bot = 'httpbot.pl';
-		$cmd = "echo '" . $path . "/verify.pl " . $path . "/" . $problem . " " . $path . "/" . $bot . " &' | at now >/dev/null 2>&1";
+		$cmd = "echo '" . $path . "/verify.pl -d " . $path . "/" . $problem . " " . $path . "/" . $bot . " >/tmp/verify.log 2>&1 &' | at now >/dev/null 2>&1";
 		echo ($cmd);
 		echo (shell_exec($cmd));
 		exit;

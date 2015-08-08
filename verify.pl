@@ -471,7 +471,7 @@ foreach my $seed (@{$problem->{sourceSeeds}}) {
   # print `clear`;
   $world->next_unit;
   while(1) {
-    $world->viz_map if $debug;
+    # $world->viz_map if $debug;
     say "sending world to bot" if $debug;
     $to_bot->say(encode_json($world->to_json));
     say "getting command from bot" if $debug;
