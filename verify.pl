@@ -382,7 +382,10 @@ foreach my $seed (@{$problem->{sourceSeeds}}) {
     say "getting command from bot" if $debug;
     my $move = <$from_bot>;
     chomp $move;
-    $world->move($move);
+    my @moves = split(//,$move);
+    foreach my $move (@moves) {
+      $world->move($move);
+    }
   }
   last;
 }
