@@ -27,6 +27,7 @@ class Board {
   has width => (is => 'rw');
   has height => (is => 'rw');
   has filled => (is => 'rw');
+  has rowsCleared => (is => 'rw');
 
   method map() {
     my $arr = [];
@@ -67,6 +68,7 @@ class Board {
   }
 
   method clear_full_rows {
+    $self->rowsCleared(0);
     foreach my $y (0..$self->height-1) {
       my $all_filled = 1;
       foreach my $x (0..$self->width-1) {
@@ -74,6 +76,10 @@ class Board {
       }
       $self->clear_row($y) if $all_filled;
     }
+  }
+
+  method getRowsCleared {
+    return $self->rowsCleared;
   }
 
   method clear_row($row) {
@@ -92,6 +98,8 @@ class Board {
     foreach my $x (0..$self->width-1) {
       delete $self->filled->{$x}{0};
     }
+    $self->rowsCleared($self->rowsCleared + 1);
+
   }
 
 }
@@ -271,6 +279,7 @@ class World {
   has source_count => (is => 'rw');
   has source_length => (is => 'rw');
   has score => (is => 'rw', default => 0);
+  has prev_lines_cleared => (is => 'rw', default => 0);
 
   has moves => (is => 'rw', default => sub { [] });
 
@@ -283,6 +292,16 @@ class World {
     die "Game over: $msg";
   }
 
+  method addToScore ($cell_size, $lines_cleared) {
+    my $points = $cell_size + 100 * (1 + $lines_cleared) * $lines_cleared / 2;
+    my $line_bonus = 0;
+    if ($self->prev_lines_cleared > 1) {
+        $line_bonus = int(($self->prev_lines_cleared - 1) * $points / 10);
+    } 
+    my $score = $points + $line_bonus;
+    $self->score($self->score + $score);
+  }
+
   method to_json {
     return {
       map => $self->map,
@@ -291,6 +310,7 @@ class World {
       current_unit => $self->current_unit->to_json,
       source_count => $self->source_count,
       source_length => $self->source_length,
+      score => $self->score,
     };
   }
 
@@ -377,6 +397,8 @@ use Data::Dump;
         $self->board->lock(@$loc);
       }
       $self->board->clear_full_rows;
+      $self->addToScore(scalar(@{$self->current_unit->real_positions}), $self->board->getRowsCleared());
+      $self->prev_lines_cleared($self->board->getRowsCleared());
       $self->next_unit;
     }
   }
@@ -450,7 +472,7 @@ foreach my $seed (@{$problem->{sourceSeeds}}) {
   # print `clear`;
   $world->next_unit;
   while(1) {
-    $world->viz_map if $debug;
+    # $world->viz_map if $debug;
     say "sending world to bot" if $debug;
     $to_bot->say(encode_json($world->to_json));
     say "getting command from bot" if $debug;
