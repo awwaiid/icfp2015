@@ -6,6 +6,7 @@
 		$problem = isset($_GET['problem']) ? $_GET['problem'] : $problem;
 		$bot = 'httpbot.pl';
 		$cmd = "echo '" . $path . "/verify.pl " . $path . "/" . $problem . " " . $path . "/" . $bot . " &' | at now >/dev/null 2>&1";
+		echo ($cmd);
 		echo (shell_exec($cmd));
 		exit;
 	}
@@ -147,13 +148,17 @@
 			 	else var move = cmd;
 			 				 	
 			 	var pivot = data.current_unit.pivot_position;
-
-			 	$("#url").html("Last Move: " + move + " Pivot: " + pivot[0] + ',' +pivot[1]);
+				var score = data.score;
+			 	
+			 	$("#url").html(
+			 		"Last Move: " + move 
+			 		+ " Pivot: " + pivot[0] + ',' +pivot[1]
+			 		+ " Score: " + score
+		 		);
 			 	var height = data.board.height;
 			 	var width = data.board.width;
 			 	var source_count = data.source_count;
 			 	var source_length = data.source_length;
-
 
 			 	$("#progress").html("Progress: " + source_count + "/" + source_length);
 			 	drawGrid(width, height, data.map, pivot);
