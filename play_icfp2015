@@ -13,7 +13,7 @@ use Getopt::Long;
 
 =head1 SYNOPSIS
 
-play_icfp2015 -f problem.json -s cthulu
+play_icfp2015 -f problem.json -p cthulu
 
   -f  FILENAME  File containing JSON encoded input
   -t  NUMBER    Time limit, in seconds, to produce output
@@ -21,9 +21,15 @@ play_icfp2015 -f problem.json -s cthulu
   -c  NUMBER    Number of processor cores available
   -p  STRING    Phrase of power
 
+CUSTOM OPTIONS
+
+  -b STRING     Command to run bot
+
 =cut
 
-my (@filenames, $timelimit, $memlimit, $cores, @phrases);
+my (@filenames, $timelimit, $memlimit, $cores, @phrases, $bot);
+
+$bot = "./randbot-valid.pl";
 
 Getopt::Long::Configure("bundling");
 Getopt::Long::Configure("auto_help");
@@ -33,12 +39,21 @@ GetOptions(
   "memout|m=i"   => \$memlimit,
   "cores|c=i"    => \$cores,
   "phrase|p=s"   => \@phrases,
+  "bot|b=s"      => \$bot,
 );
+
+@phrases = map { $_ =~ s/'/'"'"'/g; $_ } @phrases;
+my $power_params = join(" ", map { "-p " . "'$_'" } @phrases);
+# say "cmd: ./bleh $power_params";
+# say `echo ./bleh $power_params`;
+# say `perl -E 'foreach my \$a (\@ARGV) { say "->\$a" }' -- $power_params`;
+# say `echo perl -E 'foreach my \$a (\@ARGV) { say "->\$a" }' -- $power_params`;
+# exit;
 
 my @results;
 
 foreach my $problem (@filenames) {
-  my $results = `./verify.pl --contest-mode $problem ./randbot-valid.pl`;
+  my $results = `./verify.pl --contest-mode $power_params $problem $bot`;
   push @results, split(/\n/, $results);
 }
 

@@ -4,6 +4,7 @@ class World {
   has game_id => (is => 'rw');
   has version_tag => (is => 'rw');
   has seed => (is => 'rw');
+  has power_phrases => (is => 'rw', default => sub { [] });
 
   has status => (is => 'rw', default => "Running");
 
@@ -13,6 +14,7 @@ class World {
   has source_count => (is => 'rw');
   has source_length => (is => 'rw');
   has score => (is => 'rw', default => 0);
+  has problem_id => (is => 'rw', default => 0);
   has prev_lines_cleared => (is => 'rw', default => 0);
 
   has moves => (is => 'rw', default => sub { [] });
@@ -51,7 +53,9 @@ class World {
       score => $self->score,
       moves => $self->moves,
       seed => $self->seed,
+      problem_id => $self->problem_id,
       valid_moves => $self->valid_moves,
+      power_phrases => $self->power_phrases,
     };
   }
 

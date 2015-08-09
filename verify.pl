@@ -28,23 +28,26 @@ our $debug;
 our $visualize;
 our $seed_option;
 our $contest_mode;
+our @power_phrases;
 
 Getopt::Long::Configure("bundling");
 Getopt::Long::Configure("auto_help");
 GetOptions(
   "debug|d"      => \$debug,
-  "visualize"    => \$visualize,
+  "visualize|v"  => \$visualize,
   "seed|s=i"     => \$seed_option,
   "contest-mode" => \$contest_mode,
+  "power|p=s"    => \@power_phrases,
 );
 
 =head1 SYNOPSIS
 
-verify.pl [-d] [--visualize] [-s seed] problem.json ./bot
+verify.pl [-d] [-v] [-s seed] [-p power] problem.json ./bot
 
   -d, --debug      Show some debugging output
-  --visualize      Draw the state
+  -v, --visualize  Draw the state
   -s, --seed S     Set the seed to S
+  -p, --power X    Add a power phrase
   --contest-mode   Output in the contest format, all seeds
 
 =cut
@@ -60,6 +63,7 @@ my $problem = decode_json($problem_raw);
 foreach my $seed (@{$problem->{sourceSeeds}}) {
   say "Seed: $seed" if $debug;
 
+  $seed = $seed_option if $seed_option;
 
   my $board = Board->new(
     width => $problem->{width},
@@ -80,9 +84,10 @@ foreach my $seed (@{$problem->{sourceSeeds}}) {
 
   LCG::srand($seed);
   my $world = World->new(
-    game_id       => $problem->{id},
+    problem_id    => $problem->{id},
     version_tag   => $version_tag,
     seed          => $seed,
+    power_phrases => [ @power_phrases ],
     board         => $board,
     units         => $units,
     source_count  => 0,
