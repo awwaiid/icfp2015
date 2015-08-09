@@ -111,7 +111,7 @@
 			<button onClick="stopServer(); location.reload();">Start Over</button>
 			<button onClick="checkServer(true)">Check Server</button>
 			<button onClick="stopServer()">Stop Server</button>
-			&nbsp;&nbsp;&nbsp;Bot Name: <input id="aibot" type="text" value="randbot.pl" size=20 />
+			&nbsp;&nbsp;&nbsp;Bot Name: <input id="aibot" type="text" value="jbot.php" size=20 />
 
 			<hr>
 			<div id="progress"></div>
@@ -197,6 +197,8 @@
 	        var req = $.get(url, function(data) {
 	        	//var str = JSON.stringify(data.map, null, false); 
 			 	
+	        	
+
 			 	if (cmd == 'l') var move = 'SE';
 			 	else if (cmd == 'a') var move = 'SW';
 			 	else var move = cmd;
@@ -229,9 +231,19 @@
 				stopServer();
 				stop();
 			})
-			.done(function() {
+			.done(function(data) {
 				$("#result").html("IN PROGRESS");
 				$(".nav").prop('disabled', false);
+
+				var status = data.status;
+
+	        	if(status.indexOf("Game Over") > -1) {
+	        		$("#result").html(status);
+					$('.nav').prop('disabled', true);
+					stopServer();
+					stop();
+
+	        	}
 			});
     	}
 

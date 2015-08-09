@@ -52,7 +52,8 @@ sub main {
     my $steps = $request->param('steps');
     if($bot_cmd && $steps) {       
       while($steps) {
-        $to_bot->say($world);
+#        $to_bot->say($world);
+        $to_bot->print($world);
         $move = <$from_bot>;
         print $move;
         $steps--;
