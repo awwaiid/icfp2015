@@ -14,9 +14,9 @@ use IPC::Open2;
 $| = 1;
 
 my ($to_bot, $from_bot);
-my $bot_cmd = join(" ", @ARGV);
+my $bot_cmd = shift @ARGV;
 if($bot_cmd) {
-  open2($from_bot, $to_bot, $bot_cmd);
+  open2($from_bot, $to_bot, $bot_cmd, @ARGV);
 }
 
 my $server = Continuity->new(
