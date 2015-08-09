@@ -311,6 +311,7 @@ class World {
       source_count => $self->source_count,
       source_length => $self->source_length,
       score => $self->score,
+      moves => $self->moves,
     };
   }
 
