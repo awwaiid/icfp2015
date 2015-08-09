@@ -10,7 +10,14 @@ use lib "$dirname/lib";
 
 use JSON::MaybeXS;
 use Continuity;
+use IPC::Open2;
 $| = 1;
+
+my ($to_bot, $from_bot);
+my $bot_cmd = shift @ARGV;
+if($bot_cmd) {
+  open2($from_bot, $to_bot, $bot_cmd);
+}
 
 my $server = Continuity->new(
   debug_level => 0,
@@ -24,8 +31,9 @@ $server->loop;
 
 sub main {
   my ($request) = @_;
+  my $move;
   while(1) {
-    my $world = <>; # get the world... and ignore it!
+    my $world = <>;
     $request->print(
       "Cache-Control: private, no-store, no-cache\r\n",
       "Pragma: no-cache\r\n",
@@ -35,8 +43,20 @@ sub main {
       "\r\n"
     );
     $request->print($world);
-    my $move = $request->next->param('cmd');
-    say $move;
+    if($bot_cmd) {
+      my $steps = $request->next->param('steps') || 1;
+      while($steps) {
+        $to_bot->say($world);
+        $move = <$from_bot>;
+        print $move;
+        $steps--;
+        $world = <> if $steps > 0;
+      }
+    } else {
+      # No bot, so obey the server
+      $move = $request->next->param('cmd');
+      say $move;
+    }
   }
 }
 
