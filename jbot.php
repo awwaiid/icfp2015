@@ -11,7 +11,8 @@ while ($line = trim(fgets(STDIN))) {
 	}
 	//flog(print_r($myArray['moves'], true));
 
-	$move = getMove($myArray['moves']);
+	$move = getMove($myArray);
+
 
 	flog (count($myArray['moves']));
 	flog($move);
@@ -27,8 +28,41 @@ function flog ($message) {
 	error_log($message . "\n", 3, "/tmp/phperror");
 }
 
-function getMove($moves) {
+function getMove($world) {
+	$moves= $world['moves'];
+	$validMoves = $world['valid_moves'];
 
-	return array_pop($moves) == 'l' ? 'a' : 'l';
+	if (in_array('b', $validMoves)) {
+		return 'e';
+	}
+
+	if (in_array('a', $validMoves)) {
+		return 'i';
+	}
+
+	if (in_array('l', $validMoves)) {
+		return 'l';
+	}
+
+	if (in_array('p', $validMoves)) {
+		return '!';
+	}
+
+	if (in_array('d', $validMoves)) {
+		return 'd';
+	}
+	if (in_array('k', $validMoves)) {
+		return 'k';
+	}
+
+	return ' ';
+
+
+//	$currentPos = $myArray['current_unit']['position'];
+//	return array_pop($moves) == 'l' ? 'a' : 'l';
 }
+
+//function checkAdjacent(curx, cury) {
+//}
+
 

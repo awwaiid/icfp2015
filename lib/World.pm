@@ -35,6 +35,7 @@ class World {
         $line_bonus = int(($self->prev_lines_cleared - 1) * $points / 10);
     }
     my $score = $points + $line_bonus;
+
     $self->score($self->score + $score);
   }
 

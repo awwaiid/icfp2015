@@ -170,7 +170,7 @@
 
     		myTimer = setInterval(function () {
     			getMap(1); 
-    		}, 300
+    		}, 100
     		);
 
     	}
