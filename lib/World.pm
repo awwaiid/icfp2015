@@ -24,7 +24,7 @@ class World {
     $self->status("Error: $msg");
     $self->score(0);
     say STDERR "Error: $msg";
-    die "Error: $msg";
+    die "Error: $msg" unless $::ignore_errors;
   }
 
   method game_over($msg) {

@@ -30,6 +30,7 @@ our $seed_option;
 our $contest_mode;
 our @power_phrases;
 our $time_travel_enabled;
+our $ignore_errors;
 
 Getopt::Long::Configure("bundling");
 Getopt::Long::Configure("auto_help");
@@ -40,6 +41,7 @@ GetOptions(
   "contest-mode" => \$contest_mode,
   "power|p=s"    => \@power_phrases,
   "timetravel|t" => \$time_travel_enabled,
+  "noerrors|n"   => \$ignore_errors,
 );
 
 =head1 SYNOPSIS
@@ -51,6 +53,7 @@ verify.pl [-d] [-v] [-s seed] [-p power] problem.json ./bot
   -s, --seed S     Set the seed to S
   -p, --power X    Add a power phrase
   -t, --timetravel Enable time travel
+  -n, --noerrors   Ignore errors (don't die)
   --contest-mode   Output in the contest format, all seeds
 
 =cut
