@@ -5,7 +5,11 @@
 		$problem = 'problems/problem_0.json';
 		$problem = isset($_GET['problem']) ? $_GET['problem'] : $problem;
 		$bot = 'httpbot.pl';
-		$cmd = "echo '" . $path . "/verify.pl -d " . $path . "/" . $problem . " " . $path . "/" . $bot . " >/tmp/verify.log 2>&1 &' | at now >/dev/null 2>&1";
+
+		$cmd = "echo 'killall perl' | at now >/dev/null 2>&1";
+		shell_exec($cmd);
+
+		$cmd = "echo '" . $path . "/verify.pl -d " . $path . "/" . $problem . " " . $path . "/" . $bot . " " . $path . "/randbot.pl >/tmp/verify.log 2>&1 &' | at now >/dev/null 2>&1";
 		echo ($cmd);
 		echo (shell_exec($cmd));
 		exit;
@@ -69,15 +73,20 @@
 		$('nav').prop('disabled', false);
 
     </script>
+    <style type="text/css">
+    	.problem {
+    		width:120px;
+    	}
+    </style>
 </head>
 <body style="width:100%; margin:0 auto; background:#a7a09a; padding:0;">
 	<div id="wrap" style="
 		width:100%;
 		margin:0 auto;
-		background:#9c9;
+		background:#a7a09a;
 	">
 		<div id="header" style="
-			background:#ddd;
+			background:#a7a09a;
 			padding-left:120px;
 			padding-bottom: 5px;
 		">
@@ -91,13 +100,16 @@
 			<div id="url"></div>
 
 			<hr>
-			<button onClick="getMap();" value="play">Play</button>
-			<button class="nav" onClick="getMap('W');" disabled >W</button>
+			&nbsp;&nbsp;&nbsp;<button class="nav" onClick="getMap('W');" disabled >W</button>
 			<button class="nav" onClick="getMap('E');" disabled >E</button>
+			<br>
 			<button class="nav" onClick="getMap('A');" disabled >SW</button>
 			<button class="nav" onClick="getMap('F');" disabled >SE</button>
 			<button class="nav" onClick="getMap('R');" disabled >Rotate</button>
 			<button class="nav" onClick="getMap('P');" disabled >Rotate(counter)</button>
+			<button class="nav" onClick="getMap('1');" disabled >Step</button>
+			<button class="nav" onClick="play();" disabled >Play</button>
+
 		</div>
 		<div id="left" style="
 			position:absolute; 
@@ -105,7 +117,7 @@
 			background:#9c9;
 		">
 			<div>
-				<h7>Problems:</h7>
+				<h7><bold>PROBLEMS:</bold></h7>
 				<?php 
 					$problems = scandir('../problems');
 					if (is_array($problems)) {
@@ -137,9 +149,11 @@
     		}
     		if (typeof cmd === 'undefined') {
     			var url = "http://localhost:8080";
-    		} else {
+    		} else if (cmd > 0 && cmd < 100) { 
+    			var url = "http://localhost:8080/?steps=" + cmd;
+    		} else {		
     			var url = "http://localhost:8080/?cmd=" + cmd;
-    		}
+    		} 
 	        var req = $.get(url, function(data) {
 	        	//var str = JSON.stringify(data.map, null, false); 
 			 	
@@ -167,7 +181,7 @@
 			.fail(function() {
 				$("#result").html("GAME OVER");
 				$('.nav').prop('disabled', true);
-				stopServer();
+				//stopServer();
 			})
 			.done(function() {
 				$("#result").html("IN PROGRESS");
@@ -187,7 +201,7 @@
     		} else if ($("#problem").val() != '') {
     			qp = '&problem=' + $("#problem").val();
     		}
-    		$.get("http://localhost:8888/?startServer=1" + qp);
+    		var req = $.get("http://localhost:8888/?startServer=1" + qp).done(function () { sleep(1000); getMap();});
     	}
 
     	function checkServer(alert_me) {
@@ -205,7 +219,11 @@
     		$.get("http://localhost:8888/?stopServer=1");
     	}
 
-
+    	function sleep(ms) {
+		    var unixtime_ms = new Date().getTime();
+		    while(new Date().getTime() < unixtime_ms + ms) {}
+		}
+ 
     </script>
 </body>
 
