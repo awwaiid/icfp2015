@@ -189,6 +189,7 @@ class World {
     }
     print "\n";
     say "Status: " . $self->status;
+    say "Score:  " . $self->score;
     say "Valid moves: " . join("", @{ $self->valid_moves }) . "                 ";
     # sleep 0.25;
   }

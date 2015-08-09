@@ -38,7 +38,7 @@ GetOptions(
 my @results;
 
 foreach my $problem (@filenames) {
-  my $results = `./verify.pl --contest-mode $problem ./randbot.pl`;
+  my $results = `./verify.pl --contest-mode $problem ./randbot-valid.pl`;
   push @results, split(/\n/, $results);
 }
 
