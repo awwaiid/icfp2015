@@ -22,6 +22,11 @@ if($ARGV[0] eq '-d') {
   shift @ARGV;
 }
 
+our $visualize = 0;
+if($ARGV[0] eq '--visualize') {
+  $visualize = 1;
+  shift @ARGV;
+}
 
 class Board {
   has width => (is => 'rw');
@@ -39,6 +44,19 @@ class Board {
       }
     }
     return $arr;
+  }
+
+  method to_xyz($x, $y) {
+    my $xx = $x - ($y - ($y & 1)) / 2;
+    my $zz = $y;
+    my $yy = -$xx - $zz;
+    return ($xx, $yy, $zz);
+  }
+
+  method to_xy($xx, $yy, $zz) {
+    my $x = $xx + ($zz - ($zz & 1)) / 2;
+    my $y = $zz;
+    return ($x, $y);
   }
 
   method lock($x, $y) {
@@ -141,7 +159,7 @@ class Unit extends Board {
   method pivot_position {
     my ($x, $y) = @{ $self->pivot };
     return [
-      $x + $self->x_position + (($self->y_position % 2) * ($y % 2)) - ($self->y_position % 2),
+      $x + $self->x_position + (($self->y_position % 2) * ($y % 2)),
       $y + $self->y_position
     ];
   }
@@ -157,40 +175,53 @@ class Unit extends Board {
     my $pivot_x = $self->pivot->[0];
     my $pivot_y = $self->pivot->[1];
 
-    my $pivot_xx = $pivot_x - ($pivot_y - ($pivot_y & 1)) / 2;
-    my $pivot_zz = $pivot_y;
-    my $pivot_yy = -$pivot_xx - $pivot_zz;
+    my ($pivot_xx, $pivot_yy, $pivot_zz) = $self->to_xyz($pivot_x, $pivot_y);
+
+    my $position_x = $self->position->[0];
+    my $position_y = $self->position->[1];
+
+    my ($position_xx, $position_yy, $position_zz) = $self->to_xyz($position_x, $position_y);
 
     # say "pivot: $pivot_x, $pivot_y -> $pivot_xx, $pivot_yy, $pivot_zz" if $debug;
 
     foreach my $x (keys %{$self->filled}) {
       foreach my $y (keys %{$self->filled->{$x}}) {
-        my $x = $x - $pivot_x;
-        my $y = $y - $pivot_y;
+        # my $x = $x - $pivot_x - ($pivot_y&1)*(($y+1)&1);
+        # my $y = $y - $pivot_y;
 
         # say "relative: $x,$y" if $debug && $self->orientation;
 
-        my $xx = $x - ($y - ($y & 1)) / 2;
-        my $zz = $y;
-        my $yy = -$xx - $zz;
+        my ($xx, $yy, $zz) = $self->to_xyz($x, $y);
+
+        # Relative position, centered on pivot
+        $xx = $xx - $pivot_xx;
+        $yy = $yy - $pivot_yy;
+        $zz = $zz - $pivot_zz;
+
+        # say "rotate: $xx,$yy,$zz [$x,$y]               "
+        #   if $self->orientation;
 
         for (1..$self->orientation) {
-          # print "rotate: $x,$y -> $xx,$yy,$zz -> ";
           ($xx, $yy, $zz) = (-$zz, -$xx, -$yy);
           my $mx = $xx + ($zz - ($zz & 1)) / 2;
           my $my = $zz;
-          # say "$xx,$yy,$zz -> $mx,$my                        ";
+          # say " -> $xx,$yy,$zz [$mx,$my]               ";
         }
 
-        $x = $xx + ($zz - ($zz & 1)) / 2 + $pivot_x;
-        $y = $zz + $pivot_y;
+        # absolute position
+        $xx = $xx + $pivot_xx + $position_xx;
+        $yy = $yy + $pivot_yy + $position_yy;
+        $zz = $zz + $pivot_zz + $position_zz;
+
+        ($x, $y) = $self->to_xy($xx, $yy, $zz);
 
         # say "rotated: $x,$y" if $debug && $self->orientation;
 
         push @$positions, [
           # This is ... crazy
-          $x + $self->x_position + (($self->y_position % 2) * ($y % 2)) - ($self->y_position % 2),
-          $y + $self->y_position
+          # $x + $self->x_position, # + (($self->y_position % 2) * ($y % 2)) - ($self->y_position % 2),
+          # $y + $self->y_position
+          $x, $y
         ];
       }
     }
@@ -218,9 +249,9 @@ class Unit extends Board {
   method save_history {
     my @positions = @{$self->real_positions};
     my $position = join(";", sort map { join(",", @$_) } @positions );
-    if($self->history->{$position}) {
-      die "Repeated position!";
-    }
+    # if($self->history->{$position}) {
+    #   die "Repeated position!";
+    # }
     $self->history->{$position} = 1;
   }
 
@@ -234,22 +265,36 @@ class Unit extends Board {
   method move($direction) {
     # say "cur pos: " . $self->x_position . "," . $self->y_position;
     $self->prev_position([ @{ $self->position } ]);
+
+    my $position_x = $self->position->[0];
+    my $position_y = $self->position->[1];
+
+    my ($position_xx, $position_yy, $position_zz) = $self->to_xyz($position_x, $position_y);
+
     if($direction eq 'E') {
-      $self->position( [ $self->x_position + 1, $self->y_position ]);
+      # $self->position( [ $self->x_position + 1, $self->y_position ]);
+      $position_xx++;
+      $position_yy--;
     } elsif($direction eq 'W') {
-      $self->position( [ $self->x_position - 1, $self->y_position ]);
+      # $self->position( [ $self->x_position - 1, $self->y_position ]);
+      $position_xx--;
+      $position_yy++;
     } elsif($direction eq 'F') {
-      if($self->y_position % 2) {
-        $self->position( [ $self->x_position, $self->y_position + 1]);
-      } else {
-        $self->position( [ $self->x_position + 1, $self->y_position + 1]);
-      }
+      # if($self->y_position % 2) {
+      #   $self->position( [ $self->x_position, $self->y_position + 1]);
+      # } else {
+      #   $self->position( [ $self->x_position + 1, $self->y_position + 1]);
+      # }
+      $position_zz++;
+      $position_yy--;
     } elsif($direction eq 'A') {
-      if($self->y_position % 2) {
-        $self->position( [ $self->x_position - 1, $self->y_position + 1]);
-      } else {
-        $self->position( [ $self->x_position, $self->y_position + 1]);
-      }
+      # if($self->y_position % 2) {
+      #   $self->position( [ $self->x_position - 1, $self->y_position + 1]);
+      # } else {
+      #   $self->position( [ $self->x_position, $self->y_position + 1]);
+      # }
+      $position_zz++;
+      $position_xx--;
     } elsif($direction eq 'R') {
       $self->orientation( ($self->orientation + 1) % 6 );
     } elsif($direction eq 'P') {
@@ -257,6 +302,11 @@ class Unit extends Board {
     } else {
       die "Invalid direction '$direction'";
     }
+
+    ($position_x, $position_y) = $self->to_xy($position_xx, $position_yy, $position_zz);
+
+    $self->position([$position_x, $position_y]);
+
     # say "new pos: " . $self->x_position . "," . $self->y_position . " rotate " . $self->orientation;
     $self->save_history;
     # say "history: @{[ keys %{$self->history} ]}";
@@ -406,21 +456,26 @@ use Data::Dump;
   use Time::HiRes qw( sleep );
   method viz_map {
     my $map = $self->map;
-    my $count = 0;
+    my $y = 0;
     # print `clear`;
     print "\e[H";
     foreach my $row (@$map) {
-      print " " if $count % 2;
-      $count++;
+      print " " if $y % 2;
+      my $x = 0;
       foreach my $col (@$row) {
         print " ";
+        print "\e[45m"
+          if $x == $self->current_unit->pivot_position->[0]
+          && $y == $self->current_unit->pivot_position->[1];
         print $col eq 'E'
         ? "\e[90m◇\e[0m"  # grey
         : $col eq 'F'
         ? "\e[32m◆\e[0m"  # green
         : "\e[91m◆\e[0m"; # red
+        $x++;
       }
       print "\n";
+      $y++;
     }
     print "\n";
     # sleep 0.25;
@@ -472,7 +527,7 @@ foreach my $seed (@{$problem->{sourceSeeds}}) {
   # print `clear`;
   $world->next_unit;
   while(1) {
-    # $world->viz_map if $debug;
+    $world->viz_map if $visualize;
     say "sending world to bot" if $debug;
     $to_bot->say(encode_json($world->to_json));
     say "getting command from bot" if $debug;
