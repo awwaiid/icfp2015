@@ -1,7 +1,7 @@
 use Moops;
 
 class World {
-  has game_id => (is => 'rw');
+  has problem_id => (is => 'rw');
   has version_tag => (is => 'rw');
   has seed => (is => 'rw');
   has power_phrases => (is => 'rw', default => sub { [] });
@@ -15,7 +15,6 @@ class World {
   has source_length => (is => 'rw');
   has score => (is => 'rw', default => 0);
   has phrase_score => (is => 'rw', default => 0);
-  has problem_id => (is => 'rw', default => 0);
   has prev_lines_cleared => (is => 'rw', default => 0);
 
   has moves => (is => 'rw', default => sub { [] });
@@ -79,7 +78,7 @@ class World {
 
   method to_output_json {
     return {
-      problemId => $self->game_id,
+      problemId => $self->problem_id,
       tag => $self->version_tag,
       seed => $self->seed,
       solution => $self->solution,

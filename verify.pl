@@ -125,7 +125,7 @@ foreach my $seed (@{$problem->{sourceSeeds}}) {
     $result->say(encode_json([$world->to_output_json]));
 
     if($contest_mode && $world->status ne 'Running') {
-      say STDERR "ProblemId: @{[$world->game_id]} Seed: @{[$world->seed]} Score: @{[$world->score]}";
+      say STDERR "ProblemId: @{[$world->problem_id]} Seed: @{[$world->seed]} Score: @{[$world->score]}";
       say encode_json($world->to_output_json);
       last;
     }
