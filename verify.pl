@@ -482,7 +482,7 @@ use Data::Dump;
   }
 }
 
-my $problem_raw = read_file($ARGV[0]);
+my $problem_raw = read_file(shift @ARGV);
 my $problem = decode_json($problem_raw);
 
 
@@ -521,7 +521,7 @@ foreach my $seed (@{$problem->{sourceSeeds}}) {
     source_count => 0,
     source_length => $problem->{sourceLength},
   );
-  my $bot_cmd = $ARGV[1];
+  my $bot_cmd = "@ARGV";
   my ($to_bot, $from_bot);
   open2($from_bot, $to_bot, $bot_cmd);
   # print `clear`;
