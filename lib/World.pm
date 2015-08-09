@@ -5,6 +5,8 @@ class World {
   has version_tag => (is => 'rw');
   has seed => (is => 'rw');
 
+  has status => (is => 'rw', default => "Running");
+
   has board => (is => 'rw');
   has units => (is => 'rw');
   has current_unit => (is => 'rw');
@@ -16,11 +18,13 @@ class World {
   has moves => (is => 'rw', default => sub { [] });
 
   method error($msg) {
+    $self->status("Error: $msg");
     $self->score(0);
     die "Error: $msg";
   }
 
   method game_over($msg) {
+    $self->status("Game Over: $msg");
     die "Game over: $msg";
   }
 
@@ -29,13 +33,14 @@ class World {
     my $line_bonus = 0;
     if ($self->prev_lines_cleared > 1) {
         $line_bonus = int(($self->prev_lines_cleared - 1) * $points / 10);
-    } 
+    }
     my $score = $points + $line_bonus;
     $self->score($self->score + $score);
   }
 
   method to_json {
     return {
+      status => $self->status,
       map => $self->map,
       board => $self->board->to_json,
       units => [ map { $_->to_json } @{$self->units} ],
@@ -113,17 +118,21 @@ class World {
   # \t, \n, \r  (ignored)
 
   method move($direction) {
-    push @{$self->moves}, $direction;
-    my $unit_locs = $self->current_unit->real_positions;
-    $self->current_unit->move($direction);
-    if(! $self->is_position_valid) {
-      foreach my $loc (@$unit_locs) {
-        $self->board->lock(@$loc);
-      }
-      $self->board->clear_full_rows;
-      $self->addToScore(scalar(@{$self->current_unit->real_positions}), $self->board->getRowsCleared());
-      $self->prev_lines_cleared($self->board->getRowsCleared());
-      $self->next_unit;
+    if($self->status eq 'Running') {
+      try {
+        push @{$self->moves}, $direction;
+        my $unit_locs = $self->current_unit->real_positions;
+        $self->current_unit->move($direction);
+        if(! $self->is_position_valid) {
+          foreach my $loc (@$unit_locs) {
+            $self->board->lock(@$loc);
+          }
+          $self->board->clear_full_rows;
+          $self->addToScore(scalar(@{$self->current_unit->real_positions}), $self->board->getRowsCleared());
+          $self->prev_lines_cleared($self->board->getRowsCleared());
+          $self->next_unit;
+        }
+      };
     }
   }
 
@@ -152,6 +161,7 @@ class World {
       $y++;
     }
     print "\n";
+    say "Status: " . $self->status;
     # sleep 0.25;
   }
 }
