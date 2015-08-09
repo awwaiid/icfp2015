@@ -67,9 +67,9 @@ my $problem_raw = read_file(shift @ARGV);
 my $problem = decode_json($problem_raw);
 
 foreach my $seed (@{$problem->{sourceSeeds}}) {
-  say "Seed: $seed" if $debug;
 
   $seed = $seed_option if $seed_option;
+  say "Seed: $seed" if $debug;
 
   my $board = Board->new(
     width => $problem->{width},
@@ -107,20 +107,25 @@ foreach my $seed (@{$problem->{sourceSeeds}}) {
 
   while(1) {
     $world->viz_map if $visualize;
-    say "sending world to bot" if $debug;
+    # say "sending world to bot" if $debug;
     $to_bot->say(encode_json($world->to_json));
-    say "getting command from bot" if $debug;
-    my $move = <$from_bot>;
-    chomp $move;
-    if($move eq 'GO BACK' && $time_travel_enabled) {
-      $world = pop @old_worlds if @old_worlds;
-    } else {
-      push @old_worlds, dclone($world) if $time_travel_enabled;
-      my @moves = split(//,$move);
-      foreach my $move (@moves) {
-        $world->move($move);
+    # say "getting command from bot" if $debug;
+    if(!eof($from_bot)) {
+      my $move = <$from_bot>;
+      chomp $move;
+      if($move eq 'GO BACK' && $time_travel_enabled) {
+        $world = pop @old_worlds if @old_worlds;
+      } else {
+        push @old_worlds, dclone($world) if $time_travel_enabled;
+        my @moves = split(//,$move);
+        foreach my $move (@moves) {
+          $world->move($move);
+        }
       }
+    } else {
+      $world->game_over("Bot completed");
     }
+
     open my $result, '>', 'result.json';
     $result->say(encode_json([$world->to_output_json]));
 
