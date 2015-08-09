@@ -40,7 +40,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script type="text/javascript">
         window.addEventListener("keydown", dealWithKeyboard, false);
-        window.addEventListener("keypress", dealWithKeyboard, false);
+        //window.addEventListener("keypress", dealWithKeyboard, false);
 
     // {p, ', !, ., 0, 3}     move W
     // {b, c, e, f, y, 2}     move E
@@ -51,8 +51,9 @@
     // \t, \n, \r             (ignored)
         function dealWithKeyboard(e) {
               switch(e.keyCode) {
-				  case 32:
+				  case 78:
 					  getMap('1');
+					  break;
 				  case 83:
                     // s = west
                     getMap('p');
