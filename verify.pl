@@ -15,6 +15,9 @@ use LCG;
 use Data::Dump;
 use IPC::Open2;
 use Getopt::Long;
+use Storable qw( dclone );
+
+my @old_worlds = ();
 
 # Actual game stuff
 use Board;
@@ -98,9 +101,14 @@ foreach my $seed (@{$problem->{sourceSeeds}}) {
     say "getting command from bot" if $debug;
     my $move = <$from_bot>;
     chomp $move;
-    my @moves = split(//,$move);
-    foreach my $move (@moves) {
-      $world->move($move);
+    if($move eq 'GO BACK') {
+      $world = pop @old_worlds;
+    } else {
+      push @old_worlds, dclone($world);
+      my @moves = split(//,$move);
+      foreach my $move (@moves) {
+        $world->move($move);
+      }
     }
     open my $result, '>', 'result.json';
     $result->say(encode_json([$world->to_output_json]));

@@ -29,7 +29,8 @@ sub get_move {
     'c' => 'l',
     'f' => 'b',
     'a' => 'k',
-    'g' => 'd'
+    'g' => 'd',
+    'z' => 'GO BACK',
   }->{$move};
 }
 
