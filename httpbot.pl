@@ -49,8 +49,8 @@ sub main {
       $request->print($world);
       $request->next;
     }
-    if($bot_cmd) {
-      my $steps = $request->param('steps') || 1;
+    my $steps = $request->param('steps');
+    if($bot_cmd && $steps) {       
       while($steps) {
         $to_bot->say($world);
         $move = <$from_bot>;
