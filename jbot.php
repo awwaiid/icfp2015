@@ -29,6 +29,17 @@ function flog ($message) {
 }
 
 function getMove($world) {
+    return 'l';
+    /*
+     *
+     *  # {p, ', !, ., 0, 3}  move W
+        # {b, c, e, f, y, 2}  move E
+        # {a, g, h, i, j, 4}  move SW
+        # {l, m, n, o, space, 5}      move SE
+        # {d, q, r, v, z, 1}  rotate clockwise
+        # {k, s, t, u, w, x}  rotate counter-clockwise
+        # \t, \n, \r  (ignored)
+     */
     //$moves = $world['moves'];
     $validMoves = $world['valid_moves'];
 
@@ -55,7 +66,10 @@ function getMove($world) {
         return 'k';
     }
 
-    return ' ';
+    return count($world['legal_moves'])
+        ? $world['legal_moves'][0]
+        : die('');
+
 
 }
 
