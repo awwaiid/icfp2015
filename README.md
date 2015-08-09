@@ -2,13 +2,33 @@
 
 The Wrath of Isa
 
-irc.freenode.net / #thewrathofisa
+Members: awwaiid, borbyu, e2thex
 
+IRC: irc.freenode.net / #thewrathofisa
 
-to start the php visualizer:
+Language(s): Perl, PHP, Javascript, Shell
 
-run php -S localhost:8888 from the visualizer dir. ( ./visualizer)
+## Game Engine
 
-go to http://localhost:8888 in browser 
+The game engine lives in verify.pl, and can be invoked directly. It communicates with bots using STDIN/STDOUT.
 
-profit
+## Visualizer
+
+To start the php visualizer, run:
+
+    php -S localhost:8888
+
+from the visualizer dir. ( ./visualizer)
+
+Go to http://localhost:8888 in browser
+
+Profit!
+
+## Bots
+
+Bots get a line containing the state-of-the-world via STDIN, and then print their move via STDOUT, and then loop.
+
+* randbot.pl - Just does some random stuff
+* keybot.pl - Listents to terminal keyboard input
+* httpbot.pl - Exposes the game engine over HTTP. Can wrap another bot.
+
