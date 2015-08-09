@@ -28,12 +28,21 @@ my (@filenames, $timelimit, $memlimit, $cores, @phrases);
 Getopt::Long::Configure("bundling");
 Getopt::Long::Configure("auto_help");
 GetOptions(
-  "filename=s" => \@filenames,
-  "timeout=i"  => \$timelimit,
-  "memout=i"   => \$memlimit,
-  "cores=i"    => \$cores,
-  "phrase=s"   => \@phrases,
+  "filename|f=s" => \@filenames,
+  "timeout|t=i"  => \$timelimit,
+  "memout|m=i"   => \$memlimit,
+  "cores|c=i"    => \$cores,
+  "phrase|p=s"   => \@phrases,
 );
 
+my @results;
 
+foreach my $problem (@filenames) {
+  my $results = `./verify.pl --contest-mode $problem ./randbot.pl`;
+  push @results, split(/\n/, $results);
+}
+
+print "[";
+print join(",", @results);
+print "]\n";
 

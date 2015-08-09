@@ -46,32 +46,34 @@ verify.pl [-d] [--visualize] [-s seed] problem.json ./bot
 
 =cut
 
-my $problem_raw = read_file(shift @ARGV);
-my $problem = decode_json($problem_raw);
-
-my $board = Board->new(
-  width => $problem->{width},
-  height => $problem->{height},
-  problem_filled => $problem->{filled}
-);
-
-my $units = [];
-foreach my $problem_unit (@{$problem->{units}}) {
-  my $unit = Unit->new(
-    problem_filled => $problem_unit->{members},
-    pivot => [
-      $problem_unit->{pivot}->{x},
-      $problem_unit->{pivot}->{y},
-    ]);
-  push @$units, $unit;
-}
 
 my $version_tag = `git rev-parse --short HEAD`;
 chomp $version_tag;
 $version_tag .= "-" . time();
 
+my $problem_raw = read_file(shift @ARGV);
+my $problem = decode_json($problem_raw);
+
 foreach my $seed (@{$problem->{sourceSeeds}}) {
   say "Seed: $seed" if $debug;
+
+
+  my $board = Board->new(
+    width => $problem->{width},
+    height => $problem->{height},
+    problem_filled => $problem->{filled}
+  );
+
+  my $units = [];
+  foreach my $problem_unit (@{$problem->{units}}) {
+    my $unit = Unit->new(
+      problem_filled => $problem_unit->{members},
+      pivot => [
+        $problem_unit->{pivot}->{x},
+        $problem_unit->{pivot}->{y},
+      ]);
+    push @$units, $unit;
+  }
 
   LCG::srand($seed);
   my $world = World->new(
