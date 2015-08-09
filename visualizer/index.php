@@ -110,7 +110,8 @@
 			<button class="nav" onClick="getMap('F');" disabled >SE</button>
 			<button class="nav" onClick="getMap('R');" disabled >Rotate</button>
 			<button class="nav" onClick="getMap('P');" disabled >Rotate(counter)</button>
-			<button class="nav" onClick="getMap('1');" disabled >Step</button>
+			<button class="nav" onClick="getMap('1');" disabled >Step</button>			
+			<button class="nav" onClick="getMap('100');" disabled >Step 100</button>
 			<button id="play" class="nav" onClick="play();" disabled >Play</button>
 			<button id="stop" class="nav" onClick="stop();" hidden >Stop</button>
 
@@ -172,7 +173,7 @@
     		//}
     		if (typeof cmd === 'undefined') {
     			var url = "http://localhost:8080/?refresh=1";
-    		} else if (cmd > 0 && cmd < 100) { 
+    		} else if (cmd > 0 && cmd < 1000) { 
     			var url = "http://localhost:8080/?steps=" + cmd;
     		} else {		
     			var url = "http://localhost:8080/?cmd=" + cmd;
@@ -210,6 +211,7 @@
 				$("#result").html("GAME OVER");
 				$('.nav').prop('disabled', true);
 				stopServer();
+				stop();
 			})
 			.done(function() {
 				$("#result").html("IN PROGRESS");
