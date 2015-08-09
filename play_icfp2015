@@ -1,4 +1,39 @@
-#!/bin/sh
+#!/usr/bin/env perl
 
-echo "yeah... should do that..."
+use v5.18;
+
+use File::Basename;
+use File::Spec;
+my $dirname;
+BEGIN { $dirname = dirname(File::Spec->rel2abs( __FILE__ )) }
+use lib "$dirname/local/lib/perl5";
+use lib "$dirname/lib";
+
+use Getopt::Long;
+
+=head1 SYNOPSIS
+
+play_icfp2015 -f problem.json -s cthulu
+
+  -f  FILENAME  File containing JSON encoded input
+  -t  NUMBER    Time limit, in seconds, to produce output
+  -m  NUMBER    Memory limit, in megabytes, to produce output
+  -c  NUMBER    Number of processor cores available
+  -p  STRING    Phrase of power
+
+=cut
+
+my (@filenames, $timelimit, $memlimit, $cores, @phrases);
+
+Getopt::Long::Configure("bundling");
+Getopt::Long::Configure("auto_help");
+GetOptions(
+  "filename=s" => \@filenames,
+  "timeout=i"  => \$timelimit,
+  "memout=i"   => \$memlimit,
+  "cores=i"    => \$cores,
+  "phrase=s"   => \@phrases,
+);
+
+
 

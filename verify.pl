@@ -14,23 +14,37 @@ use File::Slurp;
 use LCG;
 use Data::Dump;
 use IPC::Open2;
+use Getopt::Long;
 
 # Actual game stuff
 use Board;
 use Unit;
 use World;
 
-our $debug = 0;
-if($ARGV[0] eq '-d') {
-  $debug = 1;
-  shift @ARGV;
-}
+our $debug;
+our $visualize;
+our $seed_option;
+our $contest_mode;
 
-our $visualize = 0;
-if($ARGV[0] eq '--visualize') {
-  $visualize = 1;
-  shift @ARGV;
-}
+Getopt::Long::Configure("bundling");
+Getopt::Long::Configure("auto_help");
+GetOptions(
+  "debug|d"      => \$debug,
+  "visualize"    => \$visualize,
+  "seed|s=i"     => \$seed_option,
+  "contest-mode" => \$contest_mode,
+);
+
+=head1 SYNOPSIS
+
+verify.pl [-d] [--visualize] [-s seed] problem.json ./bot
+
+  -d, --debug      Show some debugging output
+  --visualize      Draw the state
+  -s, --seed S     Set the seed to S
+  --contest-mode   Output in the contest format, all seeds
+
+=cut
 
 my $problem_raw = read_file(shift @ARGV);
 my $problem = decode_json($problem_raw);
@@ -58,20 +72,23 @@ $version_tag .= "-" . time();
 
 foreach my $seed (@{$problem->{sourceSeeds}}) {
   say "Seed: $seed" if $debug;
+
   LCG::srand($seed);
   my $world = World->new(
-    game_id => $problem->{id},
-    version_tag => $version_tag,
-    seed => $seed,
-    board => $board,
-    units => $units,
-    source_count => 0,
+    game_id       => $problem->{id},
+    version_tag   => $version_tag,
+    seed          => $seed,
+    board         => $board,
+    units         => $units,
+    source_count  => 0,
     source_length => $problem->{sourceLength},
   );
+
   my $bot_cmd = "@ARGV";
   my ($to_bot, $from_bot);
   open2($from_bot, $to_bot, $bot_cmd);
   $world->next_unit;
+
   while(1) {
     $world->viz_map if $visualize;
     say "sending world to bot" if $debug;
@@ -85,7 +102,11 @@ foreach my $seed (@{$problem->{sourceSeeds}}) {
     }
     open my $result, '>', 'result.json';
     $result->say(encode_json([$world->to_output_json]));
+
+    if($contest_mode && $world->status ne 'Running') {
+      say encode_json($world->to_output_json);
+      last;
+    }
   }
-  last;
 }
 

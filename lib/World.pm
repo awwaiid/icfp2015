@@ -49,6 +49,7 @@ class World {
       source_length => $self->source_length,
       score => $self->score,
       moves => $self->moves,
+      seed => $self->seed,
     };
   }
 
