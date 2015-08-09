@@ -97,7 +97,7 @@ foreach my $seed (@{$problem->{sourceSeeds}}) {
   my $bot_cmd = "@ARGV";
   my ($to_bot, $from_bot);
   open2($from_bot, $to_bot, $bot_cmd);
-  $world->next_unit;
+  $world->next_unit; # Get the world primed!
 
   while(1) {
     $world->viz_map if $visualize;

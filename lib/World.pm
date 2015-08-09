@@ -14,6 +14,7 @@ class World {
   has source_count => (is => 'rw');
   has source_length => (is => 'rw');
   has score => (is => 'rw', default => 0);
+  has phrase_score => (is => 'rw', default => 0);
   has problem_id => (is => 'rw', default => 0);
   has prev_lines_cleared => (is => 'rw', default => 0);
 
@@ -22,12 +23,12 @@ class World {
   method error($msg) {
     $self->status("Error: $msg");
     $self->score(0);
-    die "Error: $msg";
+    # die "Error: $msg";
   }
 
   method game_over($msg) {
     $self->status("Game Over: $msg");
-    die "Game over: $msg";
+    # die "Game over: $msg";
   }
 
   method addToScore ($cell_size, $lines_cleared) {
@@ -36,9 +37,24 @@ class World {
     if ($self->prev_lines_cleared > 1) {
         $line_bonus = int(($self->prev_lines_cleared - 1) * $points / 10);
     }
-    my $score = $points + $line_bonus;
+    my $move_score = $points + $line_bonus;
 
-    $self->score($self->score + $score);
+    my $phrase_score = 0;
+
+    my $solution = $self->solution;
+    foreach my $phrase (@{ $self->power_phrases }) {
+      my $phrase_count = 0;
+      my $phrase_len = length($phrase);
+      while($solution =~ /(?=\Q$phrase\E)/g){
+        $phrase_count++;
+      }
+      my $phrase_power = 2 * $phrase_len * $phrase_count + ($phrase_count > 0 ? 300 : 0);
+      $phrase_score += $phrase_power;
+    }
+    my $incremental_phrase_score = $phrase_score - $self->phrase_score;
+    $self->phrase_score( $phrase_score );
+
+    $self->score($self->score + $move_score + $incremental_phrase_score);
   }
 
   method to_json {
@@ -64,8 +80,12 @@ class World {
       problemId => $self->game_id,
       tag => $self->version_tag,
       seed => $self->seed,
-      solution => join('', @{$self->moves}),
+      solution => $self->solution,
     };
+  }
+
+  method solution {
+    join('', @{$self->moves});
   }
 
   method unit_count {
@@ -76,6 +96,7 @@ class World {
     $self->source_count( $self->source_count + 1 );
     if($self->source_count > $self->source_length) {
       $self->game_over("Source exhausted");
+      return;
     }
     my $unit_num = LCG::rand() % $self->unit_count;
     # say "Unit num: $unit_num";
@@ -85,6 +106,7 @@ class World {
     $self->current_unit($unit);
     if(!$self->is_position_valid) {
       $self->game_over("No room for new unit");
+      return;
     }
     return $unit;
   }
@@ -126,7 +148,7 @@ class World {
 
   method move($direction) {
     if($self->status eq 'Running') {
-      try {
+      # try {
         push @{$self->moves}, $direction;
         my $unit_locs = $self->current_unit->real_positions;
         $self->current_unit->move($direction);
@@ -140,9 +162,9 @@ class World {
           $self->prev_lines_cleared($self->board->getRowsCleared());
           $self->next_unit;
         }
-      } catch {
-        # $self->error("$_");
-      };
+      # } catch {
+      #   # $self->error("$_");
+      # };
     }
   }
 
