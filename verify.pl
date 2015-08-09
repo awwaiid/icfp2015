@@ -50,6 +50,7 @@ verify.pl [-d] [-v] [-s seed] [-p power] problem.json ./bot
   -v, --visualize  Draw the state
   -s, --seed S     Set the seed to S
   -p, --power X    Add a power phrase
+  -t, --timetravel Enable time travel
   --contest-mode   Output in the contest format, all seeds
 
 =cut
