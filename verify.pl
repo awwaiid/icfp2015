@@ -29,6 +29,7 @@ our $visualize;
 our $seed_option;
 our $contest_mode;
 our @power_phrases;
+our $time_travel_enabled;
 
 Getopt::Long::Configure("bundling");
 Getopt::Long::Configure("auto_help");
@@ -38,6 +39,7 @@ GetOptions(
   "seed|s=i"     => \$seed_option,
   "contest-mode" => \$contest_mode,
   "power|p=s"    => \@power_phrases,
+  "timetravel|t" => \$time_travel_enabled,
 );
 
 =head1 SYNOPSIS
@@ -106,10 +108,10 @@ foreach my $seed (@{$problem->{sourceSeeds}}) {
     say "getting command from bot" if $debug;
     my $move = <$from_bot>;
     chomp $move;
-    if($move eq 'GO BACK') {
-      $world = pop @old_worlds;
+    if($move eq 'GO BACK' && $time_travel_enabled) {
+      $world = pop @old_worlds if @old_worlds;
     } else {
-      push @old_worlds, dclone($world);
+      push @old_worlds, dclone($world) if $time_travel_enabled;
       my @moves = split(//,$move);
       foreach my $move (@moves) {
         $world->move($move);
