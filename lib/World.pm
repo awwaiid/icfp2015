@@ -23,7 +23,8 @@ class World {
   method error($msg) {
     $self->status("Error: $msg");
     $self->score(0);
-    # die "Error: $msg";
+    say STDERR "Error: $msg";
+    die "Error: $msg";
   }
 
   method game_over($msg) {
@@ -71,6 +72,7 @@ class World {
       seed => $self->seed,
       problem_id => $self->problem_id,
       valid_moves => $self->valid_moves,
+      legal_moves => $self->legal_moves,
       power_phrases => $self->power_phrases,
     };
   }
@@ -148,7 +150,7 @@ class World {
 
   method move($direction) {
     if($self->status eq 'Running') {
-      # try {
+      try {
         push @{$self->moves}, $direction;
         my $unit_locs = $self->current_unit->real_positions;
         $self->current_unit->move($direction);
@@ -162,9 +164,9 @@ class World {
           $self->prev_lines_cleared($self->board->getRowsCleared());
           $self->next_unit;
         }
-      # } catch {
-      #   # $self->error("$_");
-      # };
+      } catch {
+        $self->error("$_");
+      };
     }
   }
 
@@ -182,10 +184,32 @@ class World {
     return $is_valid;
   }
 
+  method is_move_legal($direction) {
+    $self->current_unit->move($direction);
+    my $is_legal = 1;
+
+    # Check for historic things
+    my $position = $self->current_unit->historic_position;
+    if($self->current_unit->history->{$position}) {
+      $is_legal = 0;
+    }
+
+    $self->current_unit->go_back;
+    return $is_legal;
+  }
+
   method valid_moves {
     my @moves;
     foreach my $move (qw( p b a l d k )) {
       push @moves, $move if $self->is_move_valid($move);
+    }
+    return [@moves];
+  }
+
+  method legal_moves {
+    my @moves;
+    foreach my $move (qw( p b a l d k )) {
+      push @moves, $move if $self->is_move_legal($move);
     }
     return [@moves];
   }
