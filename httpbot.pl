@@ -14,7 +14,7 @@ use IPC::Open2;
 $| = 1;
 
 my ($to_bot, $from_bot);
-my $bot_cmd = shift @ARGV;
+my $bot_cmd = join(" ", @ARGV);
 if($bot_cmd) {
   open2($from_bot, $to_bot, $bot_cmd);
 }
@@ -44,15 +44,14 @@ sub main {
     );
     $request->print($world);
     $request->next;
-    
+
     while ($request->param('refresh')) {
       $request->print($world);
       $request->next;
     }
     my $steps = $request->param('steps');
-    if($bot_cmd && $steps) {       
+    if($bot_cmd && $steps) {
       while($steps) {
-#        $to_bot->say($world);
         $to_bot->print($world);
         $move = <$from_bot>;
         print $move;
