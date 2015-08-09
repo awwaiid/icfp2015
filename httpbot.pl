@@ -43,8 +43,14 @@ sub main {
       "\r\n"
     );
     $request->print($world);
+    $request->next;
+    
+    while ($request->param('refresh')) {
+      $request->print($world);
+      $request->next;
+    }
     if($bot_cmd) {
-      my $steps = $request->next->param('steps') || 1;
+      my $steps = $request->param('steps') || 1;
       while($steps) {
         $to_bot->say($world);
         $move = <$from_bot>;
@@ -54,7 +60,7 @@ sub main {
       }
     } else {
       # No bot, so obey the server
-      $move = $request->next->param('cmd');
+      $move = $request->param('cmd');
       say $move;
     }
   }
