@@ -288,7 +288,7 @@
 			if (R.indexOf(cmd) > -1) return 'R';
 			if (P.indexOf(cmd) > -1) return 'P';
 
-			return '';4
+			return '';
 		}
  
     </script>
