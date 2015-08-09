@@ -50,6 +50,7 @@ class World {
       score => $self->score,
       moves => $self->moves,
       seed => $self->seed,
+      valid_moves => $self->valid_moves,
     };
   }
 
@@ -124,6 +125,7 @@ class World {
         push @{$self->moves}, $direction;
         my $unit_locs = $self->current_unit->real_positions;
         $self->current_unit->move($direction);
+        $self->current_unit->save_history;
         if(! $self->is_position_valid) {
           foreach my $loc (@$unit_locs) {
             $self->board->lock(@$loc);
@@ -133,8 +135,32 @@ class World {
           $self->prev_lines_cleared($self->board->getRowsCleared());
           $self->next_unit;
         }
+      } catch {
+        # $self->error("$_");
       };
     }
+  }
+
+  method is_move_valid($direction) {
+    $self->current_unit->move($direction);
+    my $is_valid = $self->is_position_valid;
+
+    # Check for historic things
+    my $position = $self->current_unit->historic_position;
+    if($self->current_unit->history->{$position}) {
+      $is_valid = 0;
+    }
+
+    $self->current_unit->go_back;
+    return $is_valid;
+  }
+
+  method valid_moves {
+    my @moves;
+    foreach my $move (qw( p b a l d k )) {
+      push @moves, $move if $self->is_move_valid($move);
+    }
+    return [@moves];
   }
 
   use Time::HiRes qw( sleep );
@@ -163,6 +189,7 @@ class World {
     }
     print "\n";
     say "Status: " . $self->status;
+    say "Valid moves: " . join("", @{ $self->valid_moves }) . "                 ";
     # sleep 0.25;
   }
 }

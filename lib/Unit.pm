@@ -127,12 +127,17 @@ class Unit extends Board {
     };
   }
 
-  method save_history {
+  method historic_position {
     my @positions = @{$self->real_positions};
-    my $position = join(";", sort map { join(",", @$_) } @positions );
-    # if($self->history->{$position}) {
-    #   die "Repeated position!";
-    # }
+    join(";", sort map { join(",", @$_) } @positions );
+  }
+
+
+  method save_history {
+    my $position = $self->historic_position;
+    if($self->history->{$position}) {
+      die "Repeated position!";
+    }
     $self->history->{$position} = 1;
   }
 
@@ -193,7 +198,7 @@ class Unit extends Board {
 
     # say "new pos: " . $self->x_position . "," . $self->y_position
     #   . " rotate " . $self->orientation;
-    $self->save_history;
+    # $self->save_history;
     # say "history: @{[ keys %{$self->history} ]}";
   }
 
