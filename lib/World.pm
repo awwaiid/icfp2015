@@ -111,18 +111,9 @@ class World {
   # {d, q, r, v, z, 1}  rotate clockwise
   # {k, s, t, u, w, x}  rotate counter-clockwise
   # \t, \n, \r  (ignored)
-  method denormalize_dir($direction) {
-    return {
-      W => 'p',
-      E => 'b',
-      A => 'a',
-      F => 'l',
-      R => 'd',
-      P => 'k'}->{$direction};
-  }
 
   method move($direction) {
-    push @{$self->moves}, $self->denormalize_dir($direction);
+    push @{$self->moves}, $direction;
     my $unit_locs = $self->current_unit->real_positions;
     $self->current_unit->move($direction);
     if(! $self->is_position_valid) {

@@ -137,14 +137,15 @@ class Unit extends Board {
   }
 
 
-  # W = west
-  # E = east
-  # A = South-West
-  # F = South-East
-  # R = Rotate-clockwise
-  # P = Rotate-counter-clockwise
+  # {p, ', !, ., 0, 3}  move W
+  # {b, c, e, f, y, 2}  move E
+  # {a, g, h, i, j, 4}  move SW
+  # {l, m, n, o, space, 5}      move SE
+  # {d, q, r, v, z, 1}  rotate clockwise
+  # {k, s, t, u, w, x}  rotate counter-clockwise
+  # \t, \n, \r  (ignored)
   method move($direction) {
-    say "cur pos: " . $self->x_position . "," . $self->y_position;
+    # say "cur pos: " . $self->x_position . "," . $self->y_position;
     $self->prev_position([ @{ $self->position } ]);
 
     my $position_x = $self->position->[0];
@@ -152,34 +153,37 @@ class Unit extends Board {
 
     my ($position_xx, $position_yy, $position_zz) = $self->to_xyz($position_x, $position_y);
 
-    if($direction eq 'E') {
-      # $self->position( [ $self->x_position + 1, $self->y_position ]);
+    # East
+    if($direction =~ /^[bcefy2]$/) {
       $position_xx++;
       $position_yy--;
-    } elsif($direction eq 'W') {
-      # $self->position( [ $self->x_position - 1, $self->y_position ]);
+
+    # West
+    } elsif($direction =~ /^[p'!.03]$/) {
       $position_xx--;
       $position_yy++;
-    } elsif($direction eq 'F') {
-      # if($self->y_position % 2) {
-      #   $self->position( [ $self->x_position, $self->y_position + 1]);
-      # } else {
-      #   $self->position( [ $self->x_position + 1, $self->y_position + 1]);
-      # }
+
+    # SE
+    } elsif($direction =~ /^[lmno 5]$/) {
       $position_zz++;
       $position_yy--;
-    } elsif($direction eq 'A') {
-      # if($self->y_position % 2) {
-      #   $self->position( [ $self->x_position - 1, $self->y_position + 1]);
-      # } else {
-      #   $self->position( [ $self->x_position, $self->y_position + 1]);
-      # }
+
+    # SW
+    } elsif($direction =~ /^[aghij4]$/) {
       $position_zz++;
       $position_xx--;
-    } elsif($direction eq 'R') {
+
+    # Rotate clockwise
+    } elsif($direction =~ /^[dqrvz1]$/) {
       $self->orientation( ($self->orientation + 1) % 6 );
-    } elsif($direction eq 'P') {
+
+    # Rotate counter-clockwise
+    } elsif($direction =~ /^[kstuwx]$/) {
       $self->orientation( ($self->orientation - 1) % 6 );
+
+    } elsif($direction =~ /^[\t\n\r]$/) {
+      # ignored
+
     } else {
       die "Invalid direction '$direction'";
     }
@@ -187,8 +191,8 @@ class Unit extends Board {
     ($position_x, $position_y) = $self->to_xy($position_xx, $position_yy, $position_zz);
     $self->position([$position_x, $position_y]);
 
-    say "new pos: " . $self->x_position . "," . $self->y_position
-      . " rotate " . $self->orientation;
+    # say "new pos: " . $self->x_position . "," . $self->y_position
+    #   . " rotate " . $self->orientation;
     $self->save_history;
     # say "history: @{[ keys %{$self->history} ]}";
   }

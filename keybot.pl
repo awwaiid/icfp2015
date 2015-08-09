@@ -10,6 +10,13 @@ use lib "$dirname/lib";
 
 use Term::ReadKey;
 
+# {p, ', !, ., 0, 3}  move W
+# {b, c, e, f, y, 2}  move E
+# {a, g, h, i, j, 4}  move SW
+# {l, m, n, o, space, 5}      move SE
+# {d, q, r, v, z, 1}  rotate clockwise
+# {k, s, t, u, w, x}  rotate counter-clockwise
+# \t, \n, \r  (ignored)
 sub get_move {
   open my $tty, '<', '/dev/tty';
   ReadMode 3, $tty;
@@ -17,12 +24,12 @@ sub get_move {
   ReadMode 0, $tty;
   chomp $move;
   return {
-    's' => 'W',
-    'x' => 'A',
-    'c' => 'F',
-    'f' => 'E',
-    'a' => 'P',
-    'g' => 'R'
+    's' => 'p',
+    'x' => 'a',
+    'c' => 'l',
+    'f' => 'b',
+    'a' => 'k',
+    'g' => 'd'
   }->{$move};
 }
 

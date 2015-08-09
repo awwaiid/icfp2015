@@ -41,35 +41,51 @@
     <script type="text/javascript">
 		window.addEventListener("keydown", dealWithKeyboard, false);
 		window.addEventListener("keypress", dealWithKeyboard, false);
-		 
+
+    // {p, ', !, ., 0, 3}     move W
+    // {b, c, e, f, y, 2}     move E
+    // {a, g, h, i, j, 4}     move SW
+    // {l, m, n, o, space, 5} move SE
+    // {d, q, r, v, z, 1}     rotate clockwise
+    // {k, s, t, u, w, x}     rotate counter-clockwise
+    // \t, \n, \r             (ignored)
 		function dealWithKeyboard(e) {
 		  	switch(e.keyCode) {
-		        case 83: 
-		        	// s = w
-		        	getMap('W');
+		        case 83:
+		        	// s = west
+		        	getMap('p');
 		            break;
 		        case 70:
-		            // f = e
-		            getMap('E');
+		            // f = east
+		            getMap('b');
 		            break;
 		        case 88:
 		            // x = sw
-		            getMap('A');
+		            getMap('a');
 		            break;
 		        case 67:
 		            // c = se
-		            getMap('F');
-		            break;  
+		            getMap('l');
+		            break;
 		        case 68:
 		        	// d = rotate
-		        	getMap('R');
+		        	getMap('d');
 		        	break;
 		        case 69:
 		        	// e = rotate counter
-		        	getMap('P');
+		        	getMap('k');
+              break;
+
+            // Brock's alternate keys
+		        case 71:
+		        	// g = rotate
+		        	getMap('d');
 		        	break;
-    		
-    		} 
+		        case 65:
+		        	// a = rotate counter
+		        	getMap('k');
+		        	break;
+    		}
 		}
 		$('nav').prop('disabled', false);
 
@@ -103,13 +119,13 @@
 			<div id="url"></div>
 
 			<hr>
-			&nbsp;&nbsp;&nbsp;<button class="nav" onClick="getMap('W');" disabled >W</button>
-			<button class="nav" onClick="getMap('E');" disabled >E</button>
+			&nbsp;&nbsp;&nbsp;<button class="nav" onClick="getMap('p');" disabled >W</button>
+			<button class="nav" onClick="getMap('b');" disabled >E</button>
 			<br>
-			<button class="nav" onClick="getMap('A');" disabled >SW</button>
-			<button class="nav" onClick="getMap('F');" disabled >SE</button>
-			<button class="nav" onClick="getMap('R');" disabled >Rotate</button>
-			<button class="nav" onClick="getMap('P');" disabled >Rotate(counter)</button>
+			<button class="nav" onClick="getMap('a');" disabled >SW</button>
+			<button class="nav" onClick="getMap('l');" disabled >SE</button>
+			<button class="nav" onClick="getMap('d');" disabled >Rotate</button>
+			<button class="nav" onClick="getMap('k');" disabled >Rotate(counter)</button>
 			<button class="nav" onClick="getMap('1');" disabled >Step</button>			
 			<button class="nav" onClick="getMap('100');" disabled >Step 100</button>
 			<button id="play" class="nav" onClick="play();" disabled >Play</button>
@@ -181,8 +197,8 @@
 	        var req = $.get(url, function(data) {
 	        	//var str = JSON.stringify(data.map, null, false); 
 			 	
-			 	if (cmd == 'F') var move = 'SE';
-			 	else if (cmd == 'A') var move = 'SW';
+			 	if (cmd == 'l') var move = 'SE';
+			 	else if (cmd == 'a') var move = 'SW';
 			 	else var move = cmd;
 
 			 	var moves = data.moves;
