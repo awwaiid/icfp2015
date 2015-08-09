@@ -29,7 +29,6 @@ function flog ($message) {
 }
 
 function getMove($world) {
-    return 'l';
     /*
      *
      *  # {p, ', !, ., 0, 3}  move W
