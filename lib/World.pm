@@ -90,12 +90,22 @@ class World {
       problemId => $self->problem_id,
       tag => $self->version_tag,
       seed => $self->seed,
-      solution => $self->solution,
+      # solution => $self->solution,
+      solution => $self->power_solution,
     };
   }
 
   method solution {
     join('', @{$self->moves});
+  }
+
+  method power_solution {
+    my $text = $self->solution;
+    $text =~ s/'/'"'"'/g;
+    my $goodstuff = `echo '$text' | ./say_power.py`;
+    chomp $goodstuff;
+    chomp $goodstuff;
+    return $goodstuff;
   }
 
   method unit_count {
