@@ -1,6 +1,6 @@
 #!/usr/bin/php
 <?php
-$debut = false;
+$debug = true;
 while ($line = trim(fgets(STDIN))) {
     $world = json_decode($line, true);
     if (!$world || !is_array($world)) {
@@ -78,7 +78,7 @@ function getMove($world) {
 
 
     if ($totalMoveCount % 4 == 0 && !isBadTriangle($world) && $rotate = rotate($world)) {
-        return $rotate;
+        //return $rotate;
     }
     $eastOrWest = eastOrWest($world);
     flog ($eastOrWest, 'PreferredDir');
@@ -118,7 +118,7 @@ function getMove($world) {
 
     // no valid moves left do a rotate
 
-    if ($world['source_count'] % 2 == 0 && in_array('d', $validMoves)) {
+    if (in_array('d', $validMoves)) {
         return 'd';
     }
     if (in_array('k', $validMoves)) {
