@@ -44,9 +44,11 @@ for k,item in enumerate(phrases):
 #print chars_p[0]
 
 def convert(line):
+	newline = line
 	for i,p in enumerate(phrases):
 		for a in chars_p[i]:
-			newline = line.replace(a, p);
+			if p == "ei!":
+				newline = newline.replace(a, p);
 	return newline
 
 for line in sys.stdin:
