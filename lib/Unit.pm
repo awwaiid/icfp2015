@@ -7,6 +7,7 @@ class Unit extends Board {
   has orientation => (is => 'rw', default => 0);
   has position => (is => 'rw', default => sub { [0, 0] });
   has prev_position => (is => 'rw', default => sub { [0, 0] });
+  has prev_orientation => (is => 'rw', default => sub { 0 });
 
   # Set of real-position [x, y] for duplicate detection
   has history => (is => 'rw', default => sub { {} });
@@ -16,6 +17,7 @@ class Unit extends Board {
 
   method reset {
     $self->prev_position([0,0]);
+    $self->prev_orientation(0);
     $self->position([0,0]);
     $self->orientation(0);
     $self->history({});
@@ -152,6 +154,7 @@ class Unit extends Board {
   method move($direction) {
     # say "cur pos: " . $self->x_position . "," . $self->y_position;
     $self->prev_position([ @{ $self->position } ]);
+    $self->prev_orientation( $self->orientation );
 
     my $position_x = $self->position->[0];
     my $position_y = $self->position->[1];
@@ -204,6 +207,7 @@ class Unit extends Board {
 
   method go_back {
     $self->position([ @{ $self->prev_position } ]);
+    $self->orientation( $self->prev_orientation );
   }
 
 }
