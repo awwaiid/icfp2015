@@ -1,4 +1,5 @@
 #!/usr/bin/env perl
+
 use v5.18;
 use File::Basename;
 use File::Spec;
@@ -43,34 +44,30 @@ GetOptions(
 );
 
 
-
-=head1 SYNOPSIS
-
-worldplay.pl worldserilized
-  world a json representation of a world
-
-one can then feed moves from std in and recieve a world back from
-standard out
-STDIN          STDOUT
-Move --------> newworld
-=cut
-
-my $worlddata = "@ARGV"; #get our world object
-  open my $log, '>>', '/tmp/mylog.log';
-  $worlddata = decode_json($worlddata);
-  my $world = World->thaw_world($worlddata->{me});
-
+$| = 1;
 while(1) {
-  my $move = <STDIN>;
-  chomp $move;
-  if($move eq "reset") {
-  }
-  else {
-    my @moves = split(//,$move);
-    foreach my $move (@moves) {
-      $world->move($move);
-    }
-    say encode_json($world->to_json());
-  }
+  open my $log, '>>', '/tmp/mylog.log';
 
+  my $world = <>;
+  chomp $world;
+  last if ! $world;
+  $world = decode_json($world);
+  my $real_world = World->thaw_world($world->{me});
+  $real_world->move("l");
+  say $log $real_world->solution();
+  say $log "do it";
+  my $json = encode_json($real_world->to_json()); 
+  my $bot_cmd = "./worldplay.pl";
+  my ($to_bot, $from_bot);
+  open2($from_bot, $to_bot, $bot_cmd, $json);
+  $to_bot->say("l");
+
+  if(!eof($from_bot)) {
+    my $new_world = <$from_bot>;
+    $new_world = decode_json($new_world);
+    my $real_new_world = World->thaw_world($new_world->{me});
+  say $log $real_world->solution();
+  }
+  die;
 }
+
