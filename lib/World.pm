@@ -114,6 +114,7 @@ class World {
       $self->game_over("No room for new unit");
       return;
     }
+    $self->current_unit->save_history;
     return $unit;
   }
 
