@@ -256,9 +256,10 @@ class World {
     say "Status: " . $self->status;
     say "Score:  " . $self->score;
     say "Valid moves: " . join("", @{ $self->valid_moves }) . "                 ";
-    # say "Legal moves: " . join("", @{ $self->legal_moves }) . "                 ";
-    # say "Solution: " . $self->solution;
-    # <>; # Wait for enter
+    say "Legal moves: " . join("", @{ $self->legal_moves }) . "                 ";
+    say "Unit: " . $self->unit_num;
+    say "Solution: " . $self->solution;
+    # <STDIN>; # Wait for enter
     # sleep 0.25;
   }
 

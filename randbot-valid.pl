@@ -20,7 +20,7 @@ use JSON::MaybeXS;
 
 my $moves = '';
 
-srand(0);
+#srand(0);
 
 $| = 1;
 while(1) {
@@ -29,6 +29,10 @@ while(1) {
   last if ! $world;
   $world = decode_json($world);
   my @valid_moves = @{$world->{valid_moves}};
+  my @legal_moves = @{$world->{legal_moves}};
+  # say STDERR "Valid moves: @valid_moves";
+  # say STDERR "Legal moves: @legal_moves";
+
   if(@valid_moves) {
     my $move = $valid_moves[int rand @valid_moves];
     $move = {
@@ -41,13 +45,18 @@ while(1) {
     }->{$move};
     $move =~ s/_/ /g;
     # say STDERR "*** Doing move: $move";
+      # if($move eq 'k') {
+      #   exit;
+      # }
     $moves .= $move;
     say $move;
   } else {
-    my @legal_moves = @{$world->{legal_moves}};
     if(@legal_moves) {
       my $move = $legal_moves[int rand @legal_moves];
       # say STDERR "*** Doing legal move: $move";
+      # if($move eq 'k') {
+      #   exit;
+      # }
       $moves .= $move;
       say $move;
     } else {

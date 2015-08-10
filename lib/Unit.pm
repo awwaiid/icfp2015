@@ -67,7 +67,7 @@ class Unit extends Board {
     $self->position([$x, 0]);
 
     # my $unit_width = $self->width;
-    # say STDERR "Center $unit_width on $width -> $x";
+    # say STDERR "Center unit width: $unit_width, board width: $width -> $x";
     # <STDIN>;
   }
 
