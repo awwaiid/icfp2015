@@ -30,7 +30,6 @@ class World {
 
   method game_over($msg) {
     $self->status("Game Over: $msg");
-    $self->score($self->score + $self->power_phrase_bonus($self->solution))
     # die "Game over: $msg";
   }
 
