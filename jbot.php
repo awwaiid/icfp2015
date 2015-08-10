@@ -1,5 +1,6 @@
 #!/usr/bin/php
 <?php
+$debut = false;
 while ($line = trim(fgets(STDIN))) {
     $world = json_decode($line, true);
     if (!$world || !is_array($world)) {
@@ -13,6 +14,10 @@ while ($line = trim(fgets(STDIN))) {
     move($move);
 }
 function flog ($message, $header = '') {
+    global $debug;
+    if (!$debug) {
+        return;
+    }
     if (is_array($message)) {
         $message = print_r($message, true);
     }
