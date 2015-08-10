@@ -9,11 +9,15 @@ while ($line = trim(fgets(STDIN))) {
     if (strpos($world['status'], 'Game Over') !== false) {
         exit;
     }
+    flog (mapToDir($move), 'Move');
     move($move);
 }
-function flog ($message) {
+function flog ($message, $header = '') {
     if (is_array($message)) {
         $message = print_r($message, true);
+    }
+    if ($header) {
+        $message = $header . ": " . $message;
     }
     error_log($message . "\n", 3, "/tmp/phperror");
 }
@@ -30,6 +34,23 @@ function rotate($world) {
         return 'k';
     }
     else return false;
+}
+
+function mapToDir($move) {
+    $W = ['p', '\'', '!', '.', '0', '3'];
+    $E = ['b', 'c', 'e', 'f', 'y', '2'];
+    $SW = ['a', 'g', 'h', 'i', 'j', '4'];
+    $SE = ['l', 'm', 'n', 'o', ' ', '5'];
+    $R = ['d', 'q', 'r', 'v', 'z', '1'];
+    $P = ['k', 's', 't', 'u', 'w', 'x'];
+
+    if (in_array($move, $W)) return 'W';
+    if (in_array($move, $E)) return 'E';
+    if (in_array($move, $SW)) return 'SW';
+    if (in_array($move, $SE)) return 'SE';
+    if (in_array($move, $R)) return 'Rotate';
+    if (in_array($move, $P)) return 'Counter';
+    else return 'Unknown';
 }
 
 function getMove($world) {
@@ -55,17 +76,19 @@ function getMove($world) {
         return $rotate;
     }
     $eastOrWest = eastOrWest($world);
-    flog ($eastOrWest);
+    flog ($eastOrWest, 'PreferredDir');
+    flog ($validMoves, 'Valid Moves');
     if ($eastOrWest == 'E') {
         // go east
         if (in_array('b', $validMoves)) {
             return 'e';
         }
-        if (in_array('a', $validMoves)) {
-            return $lastMove == 'i' ? 'a' : 'i';
-        }
+
         if (in_array('l', $validMoves)) {
             return 'l';
+        }
+        if (in_array('a', $validMoves)) {
+            return $lastMove == 'i' ? 'a' : 'i';
         }
         if (in_array('b', $validMoves)) {
             return '!';
@@ -76,12 +99,13 @@ function getMove($world) {
         if (in_array('p', $validMoves)) {
             return '!';
         }
-        if (in_array('l', $validMoves)) {
-            return 'l';
-        }
         if (in_array('a', $validMoves)) {
             return $lastMove == 'i' ? 'a' : 'i';
         }
+        if (in_array('l', $validMoves)) {
+            return 'l';
+        }
+
         if (in_array('b', $validMoves)) {
             return 'e';
         }
@@ -104,19 +128,23 @@ function getMove($world) {
 function eastOrWest($world) {
     $firstFilled = [];
     $map = $world['board']['map'];
-    foreach ($map as $row => $m) {
-        foreach ($m as $col => $l) {
+    foreach ($map as $col => $m) {
+        foreach ($m as $row => $l) {
             if ($l == 'F') {
                 $firstFilled = [$row, $col];
+                break 2;
             }
         }
     }
+    if (empty($firstFilled)) {
+        return 'S';
+    }
     $pos = $world['current_unit']['position'];
-    flog ($pos);
-    flog ($firstFilled);
-    if ($pos[1] < $firstFilled[1]) {
+    flog ($pos, "Current Unit Pos");
+    flog ($firstFilled, "First Filled Pos");
+    if ($pos[0] > $firstFilled[0]) {
         return 'E';
-    } else if ($pos[1] > $firstFilled[1]) {
+    } else if ($pos[0] < $firstFilled[0]) {
         return 'W';
     } else {
         return 'S';
@@ -136,6 +164,18 @@ function isBadTriangle($world) {
 }
 
 
+
+function getFuture($world) {
+
+    $path  = realpath(__DIR__. '/../');
+    $problem = 'problems/problem_ '. $world['problem_id'] . '.json';
+    $bot = 'jbot.php';
+    $cmd = $path . "/verify.pl " . $path . "/" . $problem . " " . $path . "/" . $bot;
+    $out = shell_exec($cmd);
+
+    var_dump($cmd);
+
+}
 
 
 
