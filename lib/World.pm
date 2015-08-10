@@ -74,6 +74,8 @@ class World {
       valid_moves => $self->valid_moves,
       legal_moves => $self->legal_moves,
       power_phrases => $self->power_phrases,
+      problem_id    => $self->problem_id,
+      version_tag   => $self->version_tag,
     };
   }
 
