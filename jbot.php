@@ -77,7 +77,7 @@ function getMove($world) {
     $totalMoveCount = count($world['moves']);
 
 
-    if ($totalMoveCount % 3 == 0 && !isBadTriangle($world) && $rotate = rotate($world)) {
+    if ($totalMoveCount % 4 == 0 && !isBadTriangle($world) && $rotate = rotate($world)) {
         return $rotate;
     }
     $eastOrWest = eastOrWest($world);
@@ -163,7 +163,9 @@ function isBadTriangle($world) {
     $filled = $currentUnit['filled'];
     $count = 0;
     foreach ($filled as $f) {
-        $count += $f[0];
+        if (isset($f[0])) {
+            $count += $f[0];
+        }
     }
     return $count == 3;
 }
