@@ -29,7 +29,7 @@ class Unit extends Board {
     foreach my $x (keys %{$self->filled}) {
       $x_vals->{$x} = 1;
       foreach my $y (keys %{$self->filled->{$x}}) {
-        $x_vals->{$y} = 1;
+        $y_vals->{$y} = 1;
       }
     }
     $self->width((max keys %$x_vals) + 1); # min is 1

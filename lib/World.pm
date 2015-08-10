@@ -12,6 +12,7 @@ class World {
   has board => (is => 'rw');
   has units => (is => 'rw');
   has current_unit => (is => 'rw');
+  has unit_num => (is => 'rw');
   has source_count => (is => 'rw');
   has source_length => (is => 'rw');
   has score => (is => 'rw', default => 0);
@@ -112,6 +113,7 @@ class World {
       return;
     }
     my $unit_num = LCG::rand() % $self->unit_count;
+    $self->unit_num($unit_num);
     # say "Unit num: $unit_num";
     my $unit = $self->units->[$unit_num];
     $unit->reset;
