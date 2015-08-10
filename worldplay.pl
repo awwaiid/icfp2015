@@ -2,6 +2,16 @@
 use v5.18;
 use World;
 
+=head1 SYNOPSIS
+
+worldplay.pl world
+  world a json representation of a world
+
+one can then feed moves from std in and recieve a world back from
+standard out
+
+=cut
+
 my $worlddata = "@ARGV"; #get our world object
 chomp $worlddata;
 last if ! $worlddata;
