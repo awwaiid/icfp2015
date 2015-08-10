@@ -39,37 +39,56 @@ function getMove($world) {
         # {k, s, t, u, w, x}  rotate counter-clockwise
         # \t, \n, \r  (ignored)
      */
-    //$moves = $world['moves'];
+
+    $moves = $world['moves'];
+    $lastMove = array_pop($moves);
     $validMoves = $world['valid_moves'];
 
     $totalMoveCount = count($world['moves']);
 
-    if ($totalMoveCount % 2 == 0) {
+
+    if ($totalMoveCount % 3 == 0 && !isBadTriangle($world)) {
         if (in_array('d', $validMoves)) {
-            return 'd';
-        }
-        if (in_array('k', $validMoves)) {
             return 'k';
         }
+        if (in_array('k', $validMoves)) {
+            return 'd';
+        }
+    }
+    if ($world['source_count'] % 2 == 0) {
+        // go east
+        if (in_array('b', $validMoves)) {
+            return 'e';
+        }
+        if (in_array('a', $validMoves)) {
+            return $lastMove == 'i' ? 'a' : 'i';
+        }
+        if (in_array('l', $validMoves)) {
+            return 'l';
+        }
+        if (in_array('b', $validMoves)) {
+            return '!';
+        }
+
+    } else {
+        // go west
+        if (in_array('p', $validMoves)) {
+            return '!';
+        }
+        if (in_array('l', $validMoves)) {
+            return 'l';
+        }
+        if (in_array('a', $validMoves)) {
+            return $lastMove == 'i' ? 'a' : 'i';
+        }
+        if (in_array('b', $validMoves)) {
+            return 'e';
+        }
     }
 
-    if (in_array('b', $validMoves)) {
-        return 'e';
-    }
+    // no valid moves left do a rotate
 
-    if (in_array('a', $validMoves)) {
-        return 'i';
-    }
-
-    if (in_array('l', $validMoves)) {
-        return 'l';
-    }
-
-    if (in_array('p', $validMoves)) {
-        return '!';
-    }
-
-    if (in_array('d', $validMoves)) {
+    if ($world['source_count'] % 2 == 0 && in_array('d', $validMoves)) {
         return 'd';
     }
     if (in_array('k', $validMoves)) {
@@ -81,13 +100,22 @@ function getMove($world) {
         : exit;
 
 
+
 }
 
 function lowestOpenSpot($world) {
     
 }
 
-
+function isBadTriangle($world) {
+    $currentUnit = $world['current_unit'];
+    $filled = $currentUnit['filled'];
+    if (count($filled[0]) + count($filled[1]) == 3) {
+        //if ($currentUnit['orientation'] > 2) {
+            return true;
+        //}
+    }
+}
 
 
 

@@ -117,6 +117,7 @@
             &nbsp;&nbsp;&nbsp;Bot Name: <input id="aibot" type="text" value="jbot.php" size=20 />
 
             <hr>
+            <div id="gameTitle"></div>
             <div id="progress"></div>
             <pre id="result">GAME NOT STARTED</pre>
             <div id="url"></div>
@@ -173,7 +174,7 @@
 
             myTimer = setInterval(function () {
                 getMap(1); 
-            }, 100
+            }, 50
             );
 
         }
@@ -256,6 +257,8 @@
         }
 
         function startServer(problem) {
+
+            $("#gameTitle").html(problem);
             var qp = '';
             if (typeof problem !== 'undefined') {
                 qp = '&problem=' + problem;
