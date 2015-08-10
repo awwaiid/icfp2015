@@ -1,7 +1,7 @@
 use Moops;
 
 class Unit extends Board {
-  use List::Util qw( max );
+  use List::Util qw( max min );
 
   has pivot => (is => 'rw');
   has orientation => (is => 'rw', default => 0);
@@ -23,6 +23,15 @@ class Unit extends Board {
     $self->history({});
   }
 
+  method min_x {
+    my $x_vals = {};
+    foreach my $x (keys %{$self->filled}) {
+      $x_vals->{$x} = 1;
+    }
+    my $min_x = min keys %$x_vals;
+    return $min_x;
+  }
+
   method guess_width_height {
     my $x_vals = {};
     my $y_vals = {};
@@ -32,8 +41,17 @@ class Unit extends Board {
         $y_vals->{$y} = 1;
       }
     }
-    $self->width((max keys %$x_vals) + 1); # min is 1
-    $self->height((max keys %$y_vals) + 1); # min is 1
+    my $max_x = max keys %$x_vals;
+    my $min_x = min keys %$x_vals;
+    my $x_width = $max_x - $min_x + 1;
+    $self->width($x_width); # min is 1
+    # say STDERR "Width: $x_width";
+    # <STDIN>;
+
+    my $may_x = max keys %$x_vals;
+    my $min_y = min keys %$x_vals;
+    my $y_width = $max_x - $min_x + 1;
+    $self->height($y_width); # min is 1
   }
 
   method pivot_position {
@@ -45,8 +63,12 @@ class Unit extends Board {
   }
 
   method center_on($width) {
-    my $x = int(($width - $self->width) / 2);
+    my $x = int(($width - $self->width) / 2) - $self->min_x;
     $self->position([$x, 0]);
+
+    # my $unit_width = $self->width;
+    # say STDERR "Center $unit_width on $width -> $x";
+    # <STDIN>;
   }
 
   method real_positions {
