@@ -105,7 +105,9 @@ class World {
     my $goodstuff = `echo '$text' | ./say_power.py`;
     chomp $goodstuff;
     chomp $goodstuff;
-    return $goodstuff;
+    my ($greatstuff, $count) = split(/,/, $goodstuff);
+    say STDERR "I found $count POWER PHRASES!";
+    return $greatstuff;
   }
 
   method unit_count {

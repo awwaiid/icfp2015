@@ -44,11 +44,6 @@ GetOptions(
 
 @phrases = map { $_ =~ s/'/'"'"'/g; $_ } @phrases;
 my $power_params = join(" ", map { "-p " . "'$_'" } @phrases);
-# say "cmd: ./bleh $power_params";
-# say `echo ./bleh $power_params`;
-# say `perl -E 'foreach my \$a (\@ARGV) { say "->\$a" }' -- $power_params`;
-# say `echo perl -E 'foreach my \$a (\@ARGV) { say "->\$a" }' -- $power_params`;
-# exit;
 
 my @results;
 
