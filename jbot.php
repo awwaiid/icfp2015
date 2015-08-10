@@ -42,6 +42,17 @@ function getMove($world) {
     //$moves = $world['moves'];
     $validMoves = $world['valid_moves'];
 
+    $totalMoveCount = count($world['moves']);
+
+    if ($totalMoveCount % 2 == 0) {
+        if (in_array('d', $validMoves)) {
+            return 'd';
+        }
+        if (in_array('k', $validMoves)) {
+            return 'k';
+        }
+    }
+
     if (in_array('b', $validMoves)) {
         return 'e';
     }
@@ -67,8 +78,23 @@ function getMove($world) {
 
     return count($world['legal_moves'])
         ? $world['legal_moves'][0]
-        : die('');
+        : exit;
 
 
 }
+
+function lowestOpenSpot($world) {
+    
+}
+
+
+
+
+
+
+
+
+
+
+
 

@@ -37,7 +37,7 @@
 <head>
     <title>Hex Player</title>
     <script src="hexagon.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="jquery.min.js"></script>
     <script type="text/javascript">
         window.addEventListener("keydown", dealWithKeyboard, false);
         //window.addEventListener("keypress", dealWithKeyboard, false);
