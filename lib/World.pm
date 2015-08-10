@@ -1,6 +1,7 @@
 use Moops;
 
 class World {
+  use Storable qw(freeze thaw);
   has problem_id => (is => 'rw');
   has version_tag => (is => 'rw');
   has seed => (is => 'rw');
@@ -56,13 +57,16 @@ class World {
 
     $self->score($self->score + $move_score + $incremental_phrase_score);
   }
+  method thaw_world {
+    return thaw($_[0]);
+  }
 
   method to_json {
     return {
       status => $self->status,
       map => $self->map,
       board => $self->board->to_json,
-      units => [ map { $_->to_json } @{$self->units} ],
+      #units => [ map { $_->to_json } @{$self->units} ],
       current_unit => $self->current_unit->to_json,
       upcoming_units => $self->upcoming_units,
       source_count => $self->source_count,
@@ -76,6 +80,7 @@ class World {
       power_phrases => $self->power_phrases,
       problem_id    => $self->problem_id,
       version_tag   => $self->version_tag,
+      me => freeze($self),
     };
   }
 
@@ -254,4 +259,5 @@ class World {
     # <>; # Wait for enter
     # sleep 0.25;
   }
+
 }
