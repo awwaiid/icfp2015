@@ -64,6 +64,7 @@ class World {
       board => $self->board->to_json,
       units => [ map { $_->to_json } @{$self->units} ],
       current_unit => $self->current_unit->to_json,
+      upcoming_units => $self->upcoming_units,
       source_count => $self->source_count,
       source_length => $self->source_length,
       score => $self->score,
@@ -91,6 +92,10 @@ class World {
 
   method unit_count {
     scalar @{ $self->units };
+  }
+
+  method upcoming_units {
+    [map { $_ % $self->unit_count } LCG::look_ahead(10)]
   }
 
   method next_unit {

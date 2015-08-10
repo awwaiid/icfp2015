@@ -18,5 +18,14 @@ sub rand {
   return $retval;
 }
 
+sub look_ahead {
+  my $count = shift || 1;
+  my $saved_seed = $seed;
+  my @next_stuff = ();
+  push @next_stuff, rand() for 1..$count;
+  $seed = $saved_seed;
+  return @next_stuff;
+}
+
 1;
 
